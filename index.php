@@ -6,37 +6,9 @@ define('WWW_ROOT', __DIR__ . DS);
 
 $routes = array(
     'home' => array(
-        'controller' => 'Images',
+        'controller' => 'Whiteboards',
         'action' => 'index'
-    ),
-    'detail' => array(
-        'controller' => 'Images',
-        'action' => 'view'
-    ),
-    'add' => array(
-        'controller' => 'Images',
-        'action' => 'add'
-    ),
-    'users' => array(
-        'controller' => 'Users',
-        'action' => 'index'
-    ),
-    'user-detail' => array(
-        'controller' => 'Users',
-        'action' => 'view'
-    ),
-    'register' => array(
-        'controller' => 'Users',
-        'action' => 'register'
-    ),
-    'login' => array(
-        'controller' => 'Users',
-        'action' => 'login'
-    ),
-    'logout' => array(
-        'controller' => 'Users',
-        'action' => 'logout'
-    ),
+    )
 );
 
 if(empty($_GET['page'])) {
