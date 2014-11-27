@@ -20,36 +20,23 @@ class WhiteboardsController extends Controller {
 	}
 
 	public function index() {
-		
-			$this->set("images",$this->imageDAO->selectAll());
+		$whiteboards = $this->whiteboardsDAO->getWhiteboards();
+		$this->set('whiteboards', $whiteboards);
 
-			$whiteboards = $this->whiteboardsDAO->getWhiteboards();
-        	$this->set('whiteboards', $whiteboards);
+		$arrErrorsWhiteboard = array();
 
-        	$arrErrorsWhiteboard = array();
+		if(!empty($_POST)){
+			if(empty($_POST['firstname'])) {
+				$arrErrorsWhiteboard['firstname'] = 'firstname invullen';
+			}
 
-        if(!empty($_POST) && strtolower($_POST["submit"]) == "submit"){
-
-            if(empty($_POST['firstname'])) {
-                $arrErrorsWhiteboard['firstname'] = 'firstname invullen';
-            }
-
-            if(!empty($_POST["firstname"])){
-
-
-                    $this->whiteboardsDAO->addWhiteboard($_POST['firstname'], 1);
-                    $this->redirect("index.php?page=home");
-
-
-            }
-
-        }
-
-        if(!empty($arrErrorsWhiteboard)){
-            $this->set('arrErrorsWhiteboard', $arrErrorsWhiteboard);
-        }
-		
+			if(empty($arrErrorsWhiteboard)){
+				$this->whiteboardsDAO->addWhiteboard($_POST['firstname'], 1);
+				$this->redirect("index.php?page=home");            
+			}
+			else {
+				$this->set('arrErrorsWhiteboard', $arrErrorsWhiteboard);
+			}		
+		}
 	}
-
-
 }

@@ -8,7 +8,7 @@
 		<input type="submit" id="submit" name="submit" value="submit">
 	</form>
 	<br><br>
-	<?php 
+	<?php
 	if(empty($whiteboards)){
 		echo "<p>No whiteboards yet</p>";
 	}

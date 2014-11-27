@@ -38,11 +38,13 @@ class UserDAO extends DAO {
 	public function insert($data) {
 		$errors = $this->getValidationErrors($data);
 		if(empty($errors)) {
-			$sql = "INSERT INTO `users` (`email`, `password`, `role`) VALUES (:email, :password, :role)";
+			$sql = "INSERT INTO `users` ( `username`, `password`, `email`, `profile_image`, `role_id`) VALUES (:username , :password, :email, :profile_image, :role_id)";
 	        $stmt = $this->pdo->prepare($sql);
-	        $stmt->bindValue(':email', $data['email']);
+	        $stmt->bindValue(':username', $data['username']);
 	        $stmt->bindValue(':password', $data['password']);
-	        $stmt->bindValue(':role', $data['role']);
+	        $stmt->bindValue(':email', $data['email']);
+	        $stmt->bindValue(':profile_image', $data['profile_image']);
+	        $stmt->bindValue(':role_id', $data['role_id']);
 			if($stmt->execute()) {
 				$insertedId = $this->pdo->lastInsertId();
 				return $this->selectById($insertedId);
@@ -59,8 +61,8 @@ class UserDAO extends DAO {
 		if(empty($data['password'])) {
 	        $errors['password'] = 'please enter a password';
 	    }
-	    if(!isset($data['role'])) {
-	        $errors['role'] = 'please enter a role';
+	    if(!isset($data['role_id'])) {
+	        $errors['role_id'] = 'please enter a role_id';
 	    }
 		return $errors;
 	}

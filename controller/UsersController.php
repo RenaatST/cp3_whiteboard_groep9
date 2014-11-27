@@ -34,6 +34,9 @@ class UsersController extends Controller {
 	public function register() {
 		$errors = array();
 		if(!empty($_POST)){
+			if(empty($_POST["username"])){
+				$errors["username"] = "please fill in an username";
+			}
 			if(empty($_POST["email"])){
 				$errors["email"] = "please fill in an email";
 			}
@@ -47,9 +50,11 @@ class UsersController extends Controller {
 			if(empty($errors)) {
 				$hasher = new \Phpass\Hash;
 				$user = $this->userDAO->insert(array(
-					"email"=>$_POST["email"],
+					"username"=>$_POST["username"],
 					"password"=>$hasher->hashPassword($_POST["password"]),
-					"role"=> 0
+					"email"=>$_POST["email"],
+					"profile_image"=>"test",
+					"role_id"=> 0
 					));
 				if(!empty($user)) {
 					$_SESSION["info"] = "registration was succesful";

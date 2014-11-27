@@ -8,7 +8,19 @@ $routes = array(
     'home' => array(
         'controller' => 'Whiteboards',
         'action' => 'index'
-    )
+    ),
+    'register' => array(
+        'controller' => 'Users',
+        'action' => 'Register'
+    ),
+    'login' => array(
+        'controller' => 'Users',
+        'action' => 'login'
+    ),
+    'logout' => array(
+        'controller' => 'Users',
+        'action' => 'logout'
+    ),
 );
 
 if(empty($_GET['page'])) {
