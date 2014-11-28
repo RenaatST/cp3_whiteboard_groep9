@@ -23,6 +23,13 @@ class WhiteboardsController extends Controller {
 		$whiteboards = $this->whiteboardsDAO->getWhiteboards();
 		$this->set('whiteboards', $whiteboards);
 
+		if(!empty($_SESSION["user"])){
+			$mywhiteboards = $this->whiteboardsDAO->getMyWhiteboards($_SESSION["user"]['id']);
+			$this->set('mywhiteboards', $mywhiteboards);
+		}
+
+			
+
 		$arrErrorsWhiteboard = array();
 
 		if(!empty($_POST)){
