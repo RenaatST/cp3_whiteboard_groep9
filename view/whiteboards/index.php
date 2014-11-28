@@ -1,4 +1,5 @@
 <section>
+
 	<header><h1>Whiteboards</h1></header>
 	<?php 
 
@@ -11,19 +12,16 @@
 		</form>
 		<br><br>';
 
-		if(empty($whiteboards)){
-		echo "<p>No whiteboards yet</p>";
-		}
-		else{
-			foreach ($whiteboards as $whiteboard) {
-				echo "<li>{$whiteboard["title"]} - Created by: {$whiteboard["username"]} </li>";
+			if(empty($whiteboards)){
+			echo "<p>No whiteboards yet</p>";
+			}else{
+				foreach ($whiteboards as $whiteboard) {
+					echo "<li>{$whiteboard["title"]} - Created by: {$whiteboard["username"]} </li>";
+				}
 			}
-		}
 
 
 		}
-		
-	
 	
 
 	?>
@@ -40,15 +38,11 @@
 		}
 		else{
 			foreach ($mywhiteboards as $mywhiteboard) {
-				echo "<li>{$mywhiteboard["title"]} - Date created: {$mywhiteboard["date_added"]} </li>";
+				echo "<li>{$mywhiteboard["title"]}</li>";
 			}
 		}
 
 	}
-		
-		
-	
-	
 
 	?>
 

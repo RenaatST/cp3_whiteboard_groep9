@@ -9,6 +9,10 @@ $routes = array(
         'controller' => 'Whiteboards',
         'action' => 'index'
     ),
+    'addBoard' => array(
+        'controller' => 'Whiteboards',
+        'action' => 'addBoard'
+    ),
     'register' => array(
         'controller' => 'Users',
         'action' => 'Register'

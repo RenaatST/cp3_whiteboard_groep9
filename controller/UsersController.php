@@ -28,12 +28,14 @@ class UsersController extends Controller {
 		}
 		else {
 			$this->redirect("index.php");
+		}
 	}
-}
 
 	public function register() {
 		$errors = array();
 		if(!empty($_POST)){
+
+			//controles als alle velden zijn ingevuld en als er al geen users bestaan met die username of email.
 			if(empty($_POST["username"])){
 				$errors["username"] = "please fill in an username";
 			}
@@ -46,7 +48,17 @@ class UsersController extends Controller {
 			if($_POST["password"] != $_POST["confirm_password"] || $_POST["password"] == "") {
 				$errors["confirm_password"] = "passwords are diffrent";
 			}
+			$existing = $this->userDAO->selectByEmail($_POST['email']);
+			if(!empty($existing)) {
+				$errors['email'] = 'Email address is already in use';
+			}
+			$existingusername = $this->userDAO->selectByUsername($_POST['username']);
+			if(!empty($existingusername)) {
+				$errors["username"] = "username is already in use";
+			}
 
+
+			//als er geen errors zijn mag je de user inserten in de database.
 			if(empty($errors)) {
 				$hasher = new \Phpass\Hash;
 				$user = $this->userDAO->insert(array(
@@ -61,51 +73,52 @@ class UsersController extends Controller {
 					$this->redirect("index.php");
 				}
 			}
-			$_SESSION["errors"]="registration not succesful";
-			$this->set("errors",$errors);
+		}
+	$_SESSION["errors"]="registration not succesful";
+	$this->set("errors",$errors);
+}
+
+
+
+
+public function login(){
+	$errors = array ();
+	if(!empty($_POST)) {
+		if(empty($_POST["email"])) {
+			$errors["email"] = "please fill in an email";
+		}
+		if(empty($_POST["password"])) {
+			$errors["password"] = "please fill in a password";
 		}
 
-	}
-	
+		if(empty($errors)) {
+			$user = $this->userDAO->selectByEmail($_POST["email"]);
 
-	public function login(){
-		$errors = array ();
-		if(!empty($_POST)) {
-			if(empty($_POST["email"])) {
-				$errors["email"] = "please fill in an email";
-			}
-			if(empty($_POST["password"])) {
-				$errors["password"] = "please fill in a password";
-			}
-
-			if(empty($errors)) {
-				$user = $this->userDAO->selectByEmail($_POST["email"]);
-
-				if(!empty($user)) {
-					$hasher = new \Phpass\Hash;
-					if($hasher->checkPassword($_POST["password"],$user["password"])){
-						$_SESSION["user"] = $user;
-					}
-					else{ 
-						$_SESSION["error"] = "password is incorrect";
-					}
+			if(!empty($user)) {
+				$hasher = new \Phpass\Hash;
+				if($hasher->checkPassword($_POST["password"],$user["password"])){
+					$_SESSION["user"] = $user;
 				}
-				else{
-					$_SESSION["error"]= "Username is incorrect";
+				else{ 
+					$_SESSION["error"] = "password is incorrect";
 				}
 			}
-			else {
-				$_SESSION["error"] = "could not log in";
+			else{
+				$_SESSION["error"]= "Username is incorrect";
 			}
 		}
-		$this->redirect("index.php");
-		
+		else {
+			$_SESSION["error"] = "could not log in";
+		}
 	}
+	$this->redirect("index.php");
 
-	public function logout(){
-		unset($_SESSION["user"]);
-		$this->redirect("index.php");
-		
-	}
+}
+
+public function logout(){
+	unset($_SESSION["user"]);
+	$this->redirect("index.php");
+
+}
 
 }

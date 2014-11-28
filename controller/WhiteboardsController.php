@@ -20,11 +20,15 @@ class WhiteboardsController extends Controller {
 	}
 
 	public function index() {
+		if(!empty($_SESSION["user"])) {
+			$userwhiteboards = $this->whiteboardsDAO->getWhiteboardsByUserId($_SESSION["user"]["id"]);
+			$this->set("userwhiteboards", $userwhiteboards);
+		}
 		$whiteboards = $this->whiteboardsDAO->getWhiteboards();
 		$this->set('whiteboards', $whiteboards);
 
 		if(!empty($_SESSION["user"])){
-			$mywhiteboards = $this->whiteboardsDAO->getMyWhiteboards($_SESSION["user"]['id']);
+			$mywhiteboards = $this->whiteboardsDAO->getWhiteboardsByUserId($_SESSION["user"]['id']);
 			$this->set('mywhiteboards', $mywhiteboards);
 		}
 
@@ -44,6 +48,37 @@ class WhiteboardsController extends Controller {
 			else {
 				$this->set('arrErrorsWhiteboard', $arrErrorsWhiteboard);
 			}		
+		}
+	}
+
+	public function addBoard() {
+		if(!empty($_SESSION["user"])) {
+			if(!empty($_POST)) {
+				if($this->_handleAddPost()) {
+					$this->whiteboardsDAO->addWhiteboard($_POST['whiteboardName']);
+					$_SESSION["info"] = "whiteboard added";
+					$this->redirect("index.php");
+				}
+				else {
+					$_SESSION["error"] = "did not add board";
+					$this->redirect("index.php");	
+				}
+
+			}
+		}
+	}
+
+	public function _handleAddPost() {
+		$errors = array();
+		if(empty($_POST["whiteboardName"])){
+			$errors["whiteboardName"] = "please give the whiteboard a name";
+		}
+
+		if(empty($errors)) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }

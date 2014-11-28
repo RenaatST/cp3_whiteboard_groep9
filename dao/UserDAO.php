@@ -34,6 +34,13 @@ class UserDAO extends DAO {
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
+		public function selectByUsername($username) {
+		$sql = "SELECT * FROM `users` WHERE `username` = :username";
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':username', $username);
+		$stmt->execute();
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
 
 	public function insert($data) {
 		$errors = $this->getValidationErrors($data);
