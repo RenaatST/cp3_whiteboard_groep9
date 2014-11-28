@@ -20,7 +20,11 @@ class WhiteboardsController extends Controller {
 	}
 
 	public function index() {
-		$whiteboards = $this->whiteboardsDAO->getWhiteboards();
+		if(!empty($_SESSION["user"])) {
+			$userwhiteboards = $this->whiteboardsDAO->getWhiteboardsByUserId($_SESSION["user"]["id"]);
+			$this->set("userwhiteboards", $userwhiteboards);
+		}
+		/*$whiteboards = $this->whiteboardsDAO->getWhiteboards();
 		$this->set('whiteboards', $whiteboards);
 
 		$arrErrorsWhiteboard = array();
@@ -37,6 +41,6 @@ class WhiteboardsController extends Controller {
 			else {
 				$this->set('arrErrorsWhiteboard', $arrErrorsWhiteboard);
 			}		
-		}
+		}*/
 	}
 }

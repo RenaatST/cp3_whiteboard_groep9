@@ -1,4 +1,11 @@
 <section>
+<?php 
+	if(empty($_SESSION["user"])) {
+		echo "<p>Please log in</p>";
+	}
+	else {
+		var_dump($userwhiteboards);
+?>
 	<header><h1>Whiteboards Overview</h1></header>
 
 	<form action="" method="post" >
@@ -9,15 +16,15 @@
 	</form>
 	<br><br>
 	<?php
-	if(empty($whiteboards)){
+	if(empty($userwhiteboards)){
 		echo "<p>No whiteboards yet</p>";
 	}
 	else{
-		foreach ($whiteboards as $whiteboard) {
+		foreach ($userwhiteboards as $whiteboard) {
 			echo "<li>{$whiteboard["title"]} - Created by: {$whiteboard["username"]} </li>";
 		}
 	}
-	
+	}
 
 	?>
 </section>
