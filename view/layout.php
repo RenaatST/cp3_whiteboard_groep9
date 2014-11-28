@@ -10,9 +10,14 @@
 <body>
     <nav class="navbar navbar-inverse" role="navigation">
             <div class="container">
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="index.php?page=testlinkwerktnogniet">testlinkwerktnogniet</a></li>
-                </ul>
+                <?php
+                    if(!empty($_SESSION["user"])){
+                        echo '<ul class="nav navbar-nav navbar-left">
+                            <li><a href="index.php?page=allusers">All users</a></li>
+                        </ul>';
+                    }
+                ?>
+                
                 <div class="nav navbar-right">
                     <!-- TOON LOGIN FORM & REGISTER LINK ENKEL INDIEN NIET INGELOGD -->
                     <?php 

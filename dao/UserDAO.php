@@ -27,6 +27,22 @@ class UserDAO extends DAO {
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
+	public function boardsByUser($user_id) {
+		$sql = "SELECT wb.id, wb.title
+        FROM whiteboard as wb
+        LEFT JOIN users ON wb.creator_id = users.id
+        WHERE users.id = $user_id";
+		$stmt = $this->pdo->prepare($sql);
+        if($stmt->execute())
+        {
+            $boardsbyuser = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($boardsbyuser)){
+                return $boardsbyuser;
+            }
+        }
+        return array();
+	}
+
 	public function selectByEmail($email) {
 		$sql = "SELECT * FROM `users` WHERE `email` = :email";
 		$stmt = $this->pdo->prepare($sql);

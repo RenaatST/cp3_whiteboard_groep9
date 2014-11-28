@@ -21,14 +21,19 @@ class UsersController extends Controller {
 	}
 
 	public function view() {
-		if(!empty($_GET["id"])){
-			$image = $this->imageDAO->selectByUserId($_GET["id"]);
-			$this->set("user",$this->userDAO->selectById($_GET["id"]));	
-			$this->set("images",$image);
-		}
-		else {
-			$this->redirect("index.php");
-		}
+		$users = $this->userDAO->selectAll();
+		$this->set('users', $users);
+	}
+
+	public function viewDetail()
+	{
+		$user = $this->userDAO->selectById($_GET["userid"]);
+		$this->set('user', $user);
+
+		$boardsbyuser = $this->userDAO->boardsByUser($_GET["userid"]);
+		$this->set('boardsbyuser', $boardsbyuser);
+
+
 	}
 
 	public function register() {

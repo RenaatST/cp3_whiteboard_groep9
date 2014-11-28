@@ -9,6 +9,10 @@ $routes = array(
         'controller' => 'Whiteboards',
         'action' => 'index'
     ),
+    'allusers' => array(
+        'controller' => 'Users',
+        'action' => 'View'
+    ),
     'addBoard' => array(
         'controller' => 'Whiteboards',
         'action' => 'addBoard'
@@ -24,6 +28,10 @@ $routes = array(
     'logout' => array(
         'controller' => 'Users',
         'action' => 'logout'
+    ),
+    'detailuser' => array(
+        'controller' => 'Users',
+        'action' => 'viewDetail'
     ),
 );
 
