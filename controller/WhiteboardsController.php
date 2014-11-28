@@ -43,4 +43,35 @@ class WhiteboardsController extends Controller {
 			}		
 		}*/
 	}
+
+	public function addBoard() {
+		if(!empty($_SESSION["user"])) {
+			if(!empty($_POST)) {
+				if($this->_handleAddPost()) {
+					$this->whiteboardsDAO->addWhiteboard($_POST['whiteboardName']);
+					$_SESSION["info"] = "whiteboard added";
+					$this->redirect("index.php");
+				}
+				else {
+					$_SESSION["error"] = "did not add board";
+					$this->redirect("index.php");	
+				}
+
+			}
+		}
+	}
+
+	public function _handleAddPost() {
+		$errors = array();
+		if(empty($_POST["whiteboardName"])){
+			$errors["whiteboardName"] = "please give the whiteboard a name";
+		}
+
+		if(empty($errors)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

@@ -4,13 +4,12 @@
 		echo "<p>Please log in</p>";
 	}
 	else {
-		var_dump($userwhiteboards);
 ?>
 	<header><h1>Whiteboards Overview</h1></header>
 
-	<form action="" method="post" >
+	<form action="index.php?page=addBoard" method="post" >
 		Whitboardname:<br>
-		<input type="text" name="firstname" id="firstname" value="Whiteboard X">
+		<input type="text" name="whiteboardName" id="whiteboardName" value="Whiteboard X">
 	<br><br>
 		<input type="submit" id="submit" name="submit" value="submit">
 	</form>
