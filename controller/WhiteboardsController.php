@@ -24,6 +24,15 @@ class WhiteboardsController extends Controller {
 			$userwhiteboards = $this->whiteboardsDAO->getWhiteboardsByUserId($_SESSION["user"]["id"]);
 			$this->set("userwhiteboards", $userwhiteboards);
 		}
+
+
+		if(!empty($_GET["action"]) && $_GET["action"] == "delete") {
+
+			$this->whiteboardsDAO->deleteWhiteboard($_GET["boardid"]);
+            $this->redirect('index.php?page=home');
+
+		}
+
 	}
 
 	public function addBoard() {
@@ -46,6 +55,8 @@ class WhiteboardsController extends Controller {
 
 	public function detail() {
 		$this->set("whiteboard", $this->whiteboardsDAO->getBoardById($_GET["id"]));
+
+
 	}
 
 

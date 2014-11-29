@@ -15,7 +15,8 @@
 			echo "<p>No whiteboards yet</p>";
 			}else{
 				foreach ($userwhiteboards as $whiteboard) {
-					echo "<a href=\"index.php?page=boarddetail&id={$whiteboard["id"]}\"><li>{$whiteboard["title"]} - Created by: {$whiteboard["username"]} </li></a>";
+					echo "<a href=\"index.php?page=boarddetail&id={$whiteboard["id"]}\">{$whiteboard["title"]} - Created by: {$whiteboard["username"]} </a> -- 
+					<a href='index.php?action=delete&boardid={$whiteboard["id"]}'>Delete</a><br>";
 				}
 			}
 		}

@@ -59,6 +59,16 @@ class WhiteboardsDAO extends DAO {
 
     }
 
+    function deleteWhiteboard($board_id) {
+
+        $sql = "DELETE FROM `whiteboard` WHERE `id` = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id",$board_id);
+        $stmt->execute();
+
+
+    }
+
 
 
 
