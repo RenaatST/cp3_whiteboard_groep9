@@ -24,31 +24,6 @@ class WhiteboardsController extends Controller {
 			$userwhiteboards = $this->whiteboardsDAO->getWhiteboardsByUserId($_SESSION["user"]["id"]);
 			$this->set("userwhiteboards", $userwhiteboards);
 		}
-		$whiteboards = $this->whiteboardsDAO->getWhiteboards();
-		$this->set('whiteboards', $whiteboards);
-
-		if(!empty($_SESSION["user"])){
-			$mywhiteboards = $this->whiteboardsDAO->getWhiteboardsByUserId($_SESSION["user"]['id']);
-			$this->set('mywhiteboards', $mywhiteboards);
-		}
-
-			
-
-		$arrErrorsWhiteboard = array();
-
-		if(!empty($_POST)){
-			if(empty($_POST['firstname'])) {
-				$arrErrorsWhiteboard['firstname'] = 'firstname invullen';
-			}
-
-			if(empty($arrErrorsWhiteboard)){
-				$this->whiteboardsDAO->addWhiteboard($_POST['firstname'], 1);
-				$this->redirect("index.php?page=home");            
-			}
-			else {
-				$this->set('arrErrorsWhiteboard', $arrErrorsWhiteboard);
-			}		
-		}
 	}
 
 	public function addBoard() {

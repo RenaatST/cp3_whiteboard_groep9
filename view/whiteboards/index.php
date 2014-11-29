@@ -1,50 +1,29 @@
 <section>
 
-	<header><h1>Whiteboards</h1></header>
+	
 	<?php 
 
-		if(!empty($_SESSION["user"])){
-			echo '<form action="" method="post" >
-			Whitboardname:<br>
+		if(!empty($_SESSION["user"])){?>
+			<header><h1>Whiteboards</h1></header>
+			<form action="" method="post" >
+				Whitboardname:<br>
 			<input type="text" name="firstname" id="firstname" value="Whiteboard X">
-		<br><br>
+			<br><br>
 			<input type="submit" id="submit" name="submit" value="submit">
-		</form>
-		<br><br>';
-
-			if(empty($whiteboards)){
+			</form>
+			<br><br>
+			<?php 
+			if(empty($userwhiteboards)){
 			echo "<p>No whiteboards yet</p>";
 			}else{
-				foreach ($whiteboards as $whiteboard) {
+				foreach ($userwhiteboards as $whiteboard) {
 					echo "<li>{$whiteboard["title"]} - Created by: {$whiteboard["username"]} </li>";
 				}
 			}
-
-
 		}
-	
-
+		else {
+			echo "Log in to see your whiteboards or to make one";
+		}
 	?>
-
-
-	<h2>My whiteboards:</h2>
-
-	<?php 
-
-	if(!empty($_SESSION["user"])){
-		
-		if(empty($mywhiteboards)){
-		echo "<p>No whiteboards yet, wanna make one?</p>";
-		}
-		else{
-			foreach ($mywhiteboards as $mywhiteboard) {
-				echo "<li>{$mywhiteboard["title"]}</li>";
-			}
-		}
-
-	}
-
-	?>
-
 
 </section>

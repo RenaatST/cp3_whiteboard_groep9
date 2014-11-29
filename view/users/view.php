@@ -1,23 +1,15 @@
-<section id="content">
-	<header><h1>All users!</h1></header>
-
-    <!-- Lijst van images van deze user -->
-
+<section>
+    <header><h1>Users Overview</h1></header>
+    <ul>
     <?php 
-
-        if(empty($users)){
-            echo "<p>you're alone!</p>";
-        }else{
-            foreach ($users as $user) {
-                echo "<a href='index.php?page=detailuser&userid={$user["id"]}'>{$user["username"]}</a>  -- {$user["email"]}<br>";
-
-            }
+    if(empty($users)){
+        echo "<p>No users in database</p>";
+    }
+    else{
+        foreach ($users as $user) {
+            echo "<li><a href='index.php?page=userdetail&userid={$user["id"]}'>{$user["username"]}</a>  -- {$user["email"]}</li>";
         }
-
+    }
     ?>
-
-    
-    
-    
-
+    </ul>
 </section>

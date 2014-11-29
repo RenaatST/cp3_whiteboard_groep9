@@ -9,9 +9,9 @@ $routes = array(
         'controller' => 'Whiteboards',
         'action' => 'index'
     ),
-    'allusers' => array(
+    'useroverview' => array(
         'controller' => 'Users',
-        'action' => 'View'
+        'action' => 'view'
     ),
     'addBoard' => array(
         'controller' => 'Whiteboards',
@@ -29,7 +29,7 @@ $routes = array(
         'controller' => 'Users',
         'action' => 'logout'
     ),
-    'detailuser' => array(
+    'userdetail' => array(
         'controller' => 'Users',
         'action' => 'viewDetail'
     ),

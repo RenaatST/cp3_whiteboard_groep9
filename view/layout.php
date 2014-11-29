@@ -13,8 +13,8 @@
                 <?php
                     if(!empty($_SESSION["user"])){
                         echo '<ul class="nav navbar-nav navbar-left">
-                            <li><a href="index.php?page=allusers">All users</a></li>
-                        </ul>';
+                                <li><a href="index.php?page=useroverview">User overview</a></li>
+                            </ul>';
                     }
                 ?>
                 
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </nav>
-<div class="container-fluid">
+<div class="container">
   <?php if(!empty($_SESSION['info'])): ?><div class="alert alert-success"><?php echo $_SESSION['info'];?></div><?php endif; ?>
   <?php if(!empty($_SESSION['error'])): ?><div class="alert alert-danger"><?php echo $_SESSION['error'];?></div><?php endif; ?>
   <?php echo $content; ?>
