@@ -33,6 +33,10 @@ $routes = array(
         'controller' => 'Users',
         'action' => 'viewDetail'
     ),
+    'boarddetail' => array(
+        'controller' => 'Whiteboards',
+        'action' => 'detail'
+    ),
 );
 
 if(empty($_GET['page'])) {

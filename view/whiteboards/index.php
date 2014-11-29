@@ -1,6 +1,4 @@
-<section>
-
-	
+<section>	
 	<?php 
 
 		if(!empty($_SESSION["user"])){?>
@@ -17,7 +15,7 @@
 			echo "<p>No whiteboards yet</p>";
 			}else{
 				foreach ($userwhiteboards as $whiteboard) {
-					echo "<li>{$whiteboard["title"]} - Created by: {$whiteboard["username"]} </li>";
+					echo "<a href=\"index.php?page=boarddetail&id={$whiteboard["id"]}\"><li>{$whiteboard["title"]} - Created by: {$whiteboard["username"]} </li></a>";
 				}
 			}
 		}

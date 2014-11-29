@@ -116,12 +116,14 @@ public function login(){
 			$_SESSION["error"] = "could not log in";
 		}
 	}
+	$_SESSION["info"] = "login was succesful";
 	$this->redirect("index.php");
 
 }
 
 public function logout(){
 	unset($_SESSION["user"]);
+	$_SESSION["info"] = "logout was succesful";
 	$this->redirect("index.php");
 
 }

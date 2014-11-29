@@ -21,6 +21,14 @@ class WhiteboardsDAO extends DAO {
         return array();
     }
 
+    function getBoardById($id) {
+        $sql = "SELECT * FROM `whiteboard` WHERE `id` = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
     function getWhiteboardsByUserId($user_id){
 

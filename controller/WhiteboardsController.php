@@ -43,6 +43,12 @@ class WhiteboardsController extends Controller {
 		}
 	}
 
+
+	public function detail() {
+		$this->set("whiteboard", $this->whiteboardsDAO->getBoardById($_GET["id"]));
+	}
+
+
 	public function _handleAddPost() {
 		$errors = array();
 		if(empty($_POST["whiteboardName"])){
