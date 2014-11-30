@@ -1,12 +1,9 @@
 (function(){
-
-
-	var ShoppingCartApplication = require("./classes/ShoppingCartApplication");
+	
+	var UserHandler = require("./classes/UserHandler");
 
 	function init() {
-		//TODO: maak een instantie aan van de ShoppingCartApplication class
-
-		new ShoppingCartApplication($('.app'));
+		new UserHandler($("#whiteboardDetail"));
 	}
 
 	init();

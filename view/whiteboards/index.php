@@ -3,9 +3,8 @@
 
 		if(!empty($_SESSION["user"])){?>
 			<header><h1>Whiteboards</h1></header>
-			<form action="" method="post" >
-				Whitboardname:<br>
-			<input type="text" name="firstname" id="firstname" value="Whiteboard X">
+			<form action="index.php?page=addBoard" method="post" >
+			<input type="text" name="whiteboardName" id="whiteboardName" placeholder="Whiteboard name">
 			<br><br>
 			<input type="submit" id="submit" name="submit" value="submit">
 			</form>
