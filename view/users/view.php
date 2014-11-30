@@ -10,7 +10,11 @@
                 }
                 else{
                     foreach ($users as $user) {
-                        echo "<li><a href='index.php?page=userdetail&userid={$user["id"]}'>{$user["username"]}</a>  -- {$user["email"]}</li>";
+                        if($user["username"] == $_SESSION["user"]["username"]){
+                            echo "<li><a href='index.php?page=userdetail&userid={$user["id"]}'>{$user["username"]}</a>  -- {$user["email"]} ** ME **</li>";
+                        }else{
+                            echo "<li><a href='index.php?page=userdetail&userid={$user["id"]}'>{$user["username"]}</a>  -- {$user["email"]}</li>";
+                        }
                     }
                 }
             ?>
