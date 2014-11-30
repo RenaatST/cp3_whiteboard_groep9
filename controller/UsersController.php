@@ -23,6 +23,19 @@ class UsersController extends Controller {
 	public function view() {
 		$users = $this->userDAO->selectAll();
 		$this->set('users', $users);
+
+		
+		$searchedusers = array();
+        $searchItem = "";
+        if(!empty($_POST) && !empty($_POST['searchname'])){
+            $searchedusers = $this->userDAO->searchUsers($_POST['searchname']);
+            $searchItem = $_POST['searchname'];
+            
+        }
+        
+            $this->set('searchItem', $searchItem);
+        	$this->set('searchedusers', $searchedusers);
+
 	}
 
 	public function viewDetail()

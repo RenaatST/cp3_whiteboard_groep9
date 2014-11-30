@@ -17,6 +17,10 @@ $routes = array(
         'controller' => 'Whiteboards',
         'action' => 'addBoard'
     ),
+    'search' => array(
+        'controller' => 'Users',
+        'action' => 'search'
+    ),
     'register' => array(
         'controller' => 'Users',
         'action' => 'Register'

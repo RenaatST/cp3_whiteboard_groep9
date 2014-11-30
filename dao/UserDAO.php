@@ -89,4 +89,32 @@ class UserDAO extends DAO {
 	    }
 		return $errors;
 	}
+
+	public function searchUsers($title){
+        $sql = 'SELECT * FROM users WHERE username LIKE :title';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':title', "%" .$title."%");
+        if($stmt->execute())
+        {
+            $searchedusers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($searchedusers)){
+                return $searchedusers;
+            }
+        }
+        return array();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
