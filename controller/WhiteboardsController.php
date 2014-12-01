@@ -27,10 +27,8 @@ class WhiteboardsController extends Controller {
 
 
 		if(!empty($_GET["action"]) && $_GET["action"] == "delete") {
-
 			$this->whiteboardsDAO->deleteWhiteboard($_GET["boardid"]);
             $this->redirect('index.php?page=home');
-
 		}
 
 	}
@@ -55,8 +53,7 @@ class WhiteboardsController extends Controller {
 
 	public function detail() {
 		$this->set("whiteboard", $this->whiteboardsDAO->getBoardById($_GET["id"]));
-
-
+		$this->set("users", $this->userDAO->selectAll());
 	}
 
 

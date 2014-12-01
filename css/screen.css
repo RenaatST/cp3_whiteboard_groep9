@@ -26,7 +26,9 @@
 	right: 10px;
 	top:10px;
 }
-
+.hidden {
+	display: none;
+}
 
 .left, .right {
     width: 50%;

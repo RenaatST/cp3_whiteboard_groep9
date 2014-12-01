@@ -68,8 +68,4 @@ class WhiteboardsDAO extends DAO {
 
 
     }
-
-
-
-
 }
