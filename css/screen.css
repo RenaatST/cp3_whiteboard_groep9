@@ -26,6 +26,16 @@
 	right: 10px;
 	top:10px;
 }
+
+.selectoverlay ul {
+    list-style: none;
+}
+
+.selectoverlay li {
+    height: 20px;
+
+}
+
 .hidden {
 	display: none;
 }
@@ -35,3 +45,6 @@
     float: left;
 }
 
+.userinput {
+    display: inline-block;
+}

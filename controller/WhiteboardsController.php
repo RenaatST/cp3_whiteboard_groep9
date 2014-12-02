@@ -51,13 +51,17 @@ class WhiteboardsController extends Controller {
 	}
 
 
+	public function canvas() {
+
+	}
+
 	public function detail() {
 		$this->set("whiteboard", $this->whiteboardsDAO->getBoardById($_GET["id"]));
 		$this->set("users", $this->userDAO->selectAll());
 	}
 
 
-	public function _handleAddPost() {
+	private function _handleAddPost() {
 		$errors = array();
 		if(empty($_POST["whiteboardName"])){
 			$errors["whiteboardName"] = "please give the whiteboard a name";
