@@ -26,7 +26,7 @@ class WhiteboardsController extends Controller {
 		}
 
 
-		if(!empty($_GET["action"]) && $_GET["action"] == "delete") {
+		if(!empty($_GET["action"]) && $_GET ["action"] == "delete") {
 			$this->whiteboardsDAO->deleteWhiteboard($_GET["boardid"]);
             $this->redirect('index.php?page=home');
 		}
@@ -54,7 +54,22 @@ class WhiteboardsController extends Controller {
 	public function canvas() {
 		$this->set("whiteboard", $this->whiteboardsDAO->getBoardById($_GET["boardid"]));
 
-		
+		if(!empty($_POST) && !empty($_POST['btnnote'])){
+            $this->whiteboardsDAO->addNote("note","note",$_GET["boardid"]);
+        }
+
+        if(!empty($_POST) && !empty($_POST['btnvideo'])){
+            $this->whiteboardsDAO->addVideo("video","video", "video" ,$_GET["boardid"]);
+        }
+
+        if(!empty($_POST) && !empty($_POST['btnimage'])){
+            $this->whiteboardsDAO->addImage("image","image",$_GET["boardid"]);
+        }
+
+
+        $images = $this->whiteboardsDAO->getImagesByBoardId($_GET["boardid"]);
+		$this->set("images", $images);
+
 
 
 

@@ -48,16 +48,56 @@ class WhiteboardsDAO extends DAO {
         return array();
     }
 
-    function addWhiteboard($title) {
+    function addNote($title, $text, $whiteboard_id) {
 
-        $sql = "INSERT INTO whiteboard (title, creator_id) VALUES (:title, :creator_id)";
+        $sql = "INSERT INTO postits (title, text, whiteboard_id) VALUES (:title, :text, :whiteboard_id)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":title",$title);
-        $stmt->bindValue(":creator_id",$_SESSION["user"]["id"]);
+        $stmt->bindValue(":text",$text);
+        $stmt->bindValue(":whiteboard_id",$whiteboard_id);
         $stmt->execute();
-
-
     }
+
+    function addVideo($title, $description, $video_id, $whiteboard_id) {
+
+        $sql = "INSERT INTO videos (title, description, video_id whiteboard_id) VALUES (:title, :description, :video_id :whiteboard_id)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":title",$title);
+        $stmt->bindValue(":description",$description);
+        $stmt->bindValue(":video_id",$video_id);
+        $stmt->bindValue(":whiteboard_id",$whiteboard_id);
+        $stmt->execute();
+    }
+
+    function addImage($title, $image, $whiteboard_id) {
+
+        $sql = "INSERT INTO images (title, image, whiteboard_id) VALUES (:title, :image, :whiteboard_id)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":title",$title);
+        $stmt->bindValue(":image",$image);
+        $stmt->bindValue(":whiteboard_id",$whiteboard_id);
+        $stmt->execute();
+    }
+
+    function getImagesByBoardId($whiteboard_id){
+
+        $sql = "SELECT * FROM images WHERE whiteboard_id = $whiteboard_id";
+        $stmt = $this->pdo->prepare($sql);
+        if($stmt->execute())
+        {
+            $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($images)){
+                return $images;
+            }
+        }
+        return array();
+    }
+
+
+
+
+
+
 
     function deleteWhiteboard($board_id) {
 
