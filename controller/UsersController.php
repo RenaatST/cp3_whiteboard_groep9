@@ -115,6 +115,7 @@ public function login(){
 			if(!empty($user)) {
 				$hasher = new \Phpass\Hash;
 				if($hasher->checkPassword($_POST["password"],$user["password"])){
+					$_SESSION["info"] = "login was succesful";
 					$_SESSION["user"] = $user;
 				}
 				else{ 
@@ -129,7 +130,6 @@ public function login(){
 			$_SESSION["error"] = "could not log in";
 		}
 	}
-	$_SESSION["info"] = "login was succesful";
 	$this->redirect("index.php");
 
 }
