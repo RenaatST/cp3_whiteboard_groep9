@@ -80,3 +80,54 @@
 .userinput {
     display: inline-block;
 }
+
+section {
+    position: relative;
+}
+
+#canvaspagina {
+    position: absolute;
+    background-color: #fff000;
+    width: 100%;
+    height: 100%;
+    margin-left: -270px;
+    margin-top: -20px;
+    z-index: 10;
+    background-color: #ffffff;
+    background-image:linear-gradient(#EBEBEB, #ffffff);
+
+}
+
+.canvaszelf {
+
+    background-color: transparent;
+    background-image:linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .5) 25%, rgba(255, 255, 255, .5) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .5) 75%, rgba(255, 255, 255, .5) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .5) 25%, rgba(255, 255, 255, .5) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .5) 75%, rgba(255, 255, 255, .5) 76%, transparent 77%, transparent);
+    height:100%;
+    background-size:50px 50px;
+
+}
+
+nav {
+
+    z-index: 100;
+
+}
+
+#whiteboardnav {
+    margin-left: 10px;
+    position: fixed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

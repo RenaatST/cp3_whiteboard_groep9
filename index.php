@@ -17,6 +17,10 @@ $routes = array(
         'controller' => 'Whiteboards',
         'action' => 'addBoard'
     ),
+    'canvaspage' => array(
+        'controller' => 'Whiteboards',
+        'action' => 'canvas'
+    ),
     'search' => array(
         'controller' => 'Users',
         'action' => 'search'

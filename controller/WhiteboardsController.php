@@ -52,6 +52,11 @@ class WhiteboardsController extends Controller {
 
 
 	public function canvas() {
+		$this->set("whiteboard", $this->whiteboardsDAO->getBoardById($_GET["boardid"]));
+
+		
+
+
 
 	}
 
