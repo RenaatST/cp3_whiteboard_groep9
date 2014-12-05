@@ -48,6 +48,15 @@ class WhiteboardsDAO extends DAO {
         return array();
     }
 
+    function addWhiteboard($title) {
+ 
+         $sql = "INSERT INTO whiteboard (title, creator_id) VALUES (:title, :creator_id)";
+         $stmt = $this->pdo->prepare($sql);
+         $stmt->bindValue(":title",$title);
+         $stmt->bindValue(":creator_id",$_SESSION["user"]["id"]);
+         $stmt->execute();
+    }
+
     function addNote($title, $text, $whiteboard_id) {
 
         $sql = "INSERT INTO postits (title, text, whiteboard_id) VALUES (:title, :text, :whiteboard_id)";
@@ -92,12 +101,6 @@ class WhiteboardsDAO extends DAO {
         }
         return array();
     }
-
-
-
-
-
-
 
     function deleteWhiteboard($board_id) {
 
