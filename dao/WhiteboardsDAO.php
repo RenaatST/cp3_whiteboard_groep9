@@ -57,13 +57,15 @@ class WhiteboardsDAO extends DAO {
          $stmt->execute();
     }
 
-    function addNote($title, $text, $whiteboard_id) {
+    function addNote($title, $text, $whiteboard_id, $xPos, $yPos) {
 
-        $sql = "INSERT INTO postits (title, text, whiteboard_id) VALUES (:title, :text, :whiteboard_id)";
+        $sql = "INSERT INTO postits (title, text, whiteboard_id, xPos, yPos) VALUES (:title, :text, :whiteboard_id, :xPos, :yPos)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":title",$title);
         $stmt->bindValue(":text",$text);
         $stmt->bindValue(":whiteboard_id",$whiteboard_id);
+        $stmt->bindValue(":xPos",$xPos);
+        $stmt->bindValue(":yPos",$yPos);
         $stmt->execute();
     }
 
@@ -78,13 +80,15 @@ class WhiteboardsDAO extends DAO {
         $stmt->execute();
     }
 
-    function addImage($title, $image, $whiteboard_id) {
+    function addImage($title, $image, $whiteboard_id, $xPos, $yPos) {
 
-        $sql = "INSERT INTO images (title, image, whiteboard_id) VALUES (:title, :image, :whiteboard_id)";
+        $sql = "INSERT INTO images (title, image, whiteboard_id, xPos, yPos) VALUES (:title, :image, :whiteboard_id, :xPos, :yPos)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":title",$title);
         $stmt->bindValue(":image",$image);
         $stmt->bindValue(":whiteboard_id",$whiteboard_id);
+        $stmt->bindValue(":xPos",$xPos);
+        $stmt->bindValue(":yPos",$yPos);
         $stmt->execute();
     }
 
@@ -97,6 +101,20 @@ class WhiteboardsDAO extends DAO {
             $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if(!empty($images)){
                 return $images;
+            }
+        }
+        return array();
+    }
+
+    function getNotesByBoardId($whiteboard_id){
+
+        $sql = "SELECT * FROM postits WHERE whiteboard_id = $whiteboard_id";
+        $stmt = $this->pdo->prepare($sql);
+        if($stmt->execute())
+        {
+            $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($notes)){
+                return $notes;
             }
         }
         return array();

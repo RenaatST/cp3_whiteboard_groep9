@@ -1,6 +1,8 @@
 module.exports = (function(){
 	function UserHandler() {
 
+		console.log("user");
+
 		$("#addUserbtn").on("click",function(event) {
 			$(".selectoverlay").removeClass("hidden");
 		});

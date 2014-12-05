@@ -15,15 +15,30 @@
             </form>
 		</nav>
 
-		<?php 
+		<?php
                 if(empty($images)){
                 }
                 else{
                     foreach ($images as $image) {
-                        echo "<div id='image'>&nbsp;</div>";
+                        echo "<div id='image{$image["id"]}' class='images' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'>&nbsp;</div>";
+
                     }
                 }
         ?>
+
+        <?php
+                if(empty($notes)){
+                }
+                else{
+                    foreach ($notes as $note) {
+                        echo "<form class='note' action='' method=''><textarea rows='4' cols='50' maxlength='259' style='left:{$note["xPos"]}px;top:{$note["yPos"]}px;'></textarea></form>";
+
+                    }
+                }
+        ?>
+
+        
+
 
 
 

@@ -53,22 +53,29 @@ class WhiteboardsController extends Controller {
 
 	public function canvas() {
 		$this->set("whiteboard", $this->whiteboardsDAO->getBoardById($_GET["boardid"]));
+		$randx = rand(100,1000);
+		$randy = rand(100,400);
 
 		if(!empty($_POST) && !empty($_POST['btnnote'])){
-            $this->whiteboardsDAO->addNote("note","note",$_GET["boardid"]);
+            $this->whiteboardsDAO->addNote("note","note",$_GET["boardid"], $randx, $randy);
         }
 
         if(!empty($_POST) && !empty($_POST['btnvideo'])){
             $this->whiteboardsDAO->addVideo("video","video", "video" ,$_GET["boardid"]);
         }
 
+        
+
         if(!empty($_POST) && !empty($_POST['btnimage'])){
-            $this->whiteboardsDAO->addImage("image","image",$_GET["boardid"]);
+            $this->whiteboardsDAO->addImage("image","image",$_GET["boardid"], $randx, $randy);
         }
 
 
         $images = $this->whiteboardsDAO->getImagesByBoardId($_GET["boardid"]);
 		$this->set("images", $images);
+
+		$notes = $this->whiteboardsDAO->getNotesByBoardId($_GET["boardid"]);
+		$this->set("notes", $notes);
 
 
 
