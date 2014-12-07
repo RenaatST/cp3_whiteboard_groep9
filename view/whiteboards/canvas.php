@@ -20,11 +20,15 @@
                 }
                 else{
                     foreach ($images as $image) {
-                        echo "<div id='image{$image["id"]}' class='images' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'>&nbsp;</div>";
+                        /*echo "<div id='image{$image["id"]}' class='images' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'>&nbsp;</div>";*/
+                        echo "<form method='post' action=''><div class='form-group image-input' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'><input type='file' id='imageInput1' name='imageInput1' class='form-control' /></div></form>";
 
                     }
                 }
         ?>
+
+
+        
 
         <?php
                 if(empty($notes)){
