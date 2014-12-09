@@ -28,7 +28,7 @@ class UsersController extends Controller {
 		$searchedusers = array();
         $searchItem = "";
         if(!empty($_POST) && !empty($_POST['searchname'])){
-            $searchedusers = $this->userDAO->searchUsers($_POST['searchname']);
+            $searchedusers = $this->userDAO->searchUsers($_POST['searchname'], $_SESSION['user']['id']);
             $searchItem = $_POST['searchname'];
             
         }

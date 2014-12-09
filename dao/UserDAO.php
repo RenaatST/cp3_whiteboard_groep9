@@ -27,6 +27,8 @@ class UserDAO extends DAO {
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
+	
+
 	public function boardsByUser($user_id) {
 		$sql = "SELECT wb.id, wb.title
         FROM whiteboard as wb
@@ -108,10 +110,11 @@ class UserDAO extends DAO {
 		return $errors;
 	}
 
-	public function searchUsers($title){
-        $sql = 'SELECT * FROM users WHERE username LIKE :title';
+	public function searchUsers($title, $user_id){
+        $sql = 'SELECT * FROM users WHERE users.username LIKE :title AND users.id != :user_id';
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':title', "%" .$title."%");
+        $stmt->bindValue(':user_id', $user_id);
         if($stmt->execute())
         {
             $searchedusers = $stmt->fetchAll(PDO::FETCH_ASSOC);

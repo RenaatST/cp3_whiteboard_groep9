@@ -23,6 +23,9 @@ class WhiteboardsController extends Controller {
 		if(!empty($_SESSION["user"])) {
 			$userwhiteboards = $this->whiteboardsDAO->getWhiteboardsByUserId($_SESSION["user"]["id"]);
 			$this->set("userwhiteboards", $userwhiteboards);
+
+			$boardsIParticipateIn = $this->whiteboardsDAO->overviewBoardsIParticipateIn($_SESSION["user"]["id"]);
+			$this->set("boardsIParticipateIn", $boardsIParticipateIn);
 		}
 
 
@@ -83,8 +86,41 @@ class WhiteboardsController extends Controller {
 	}
 
 	public function detail() {
+
+
 		$this->set("whiteboard", $this->whiteboardsDAO->getBoardById($_GET["id"]));
 		$this->set("users", $this->userDAO->selectAll());
+
+		$useratboard = $this->whiteboardsDAO->getUserForBoard($_SESSION["user"]["id"], $_GET["id"]);
+		$this->set("useratboard", $useratboard);
+
+		$participatingUsers = $this->whiteboardsDAO->participatingUserByBoard($_GET["id"], $_SESSION['user']['id']);
+		$this->set('participatingUsers', $participatingUsers);
+
+
+		$searchedusers = array();
+        $searchItem = "";
+        if(!empty($_POST) && !empty($_POST['searchname'])){
+            $searchedusers = $this->userDAO->searchUsers($_POST['searchname'], $_SESSION['user']['id']);
+            $searchItem = $_POST['searchname'];
+            
+        }
+        
+        $this->set('searchItem', $searchItem);
+        $this->set('searchedusers', $searchedusers);
+
+        
+
+
+        if(!empty($_GET["action"]) && $_GET ["action"] == "addusertoboard" && !empty($_SESSION["user"])) {
+        	$this->whiteboardsDAO->addParticipant($_GET["userid"], $_GET["id"]);
+        	$this->redirect("index.php?page=boarddetail&id=" . $_GET["id"]);
+		}
+		
+
+
+
+
 	}
 
 

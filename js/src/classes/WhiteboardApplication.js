@@ -4,6 +4,9 @@ module.exports = (function(){
 	var teller = 0;
 
 	function WhiteboardApplication()	 {
+
+		
+		
 		//clickevents maken voor de knoppen van adden dinges.
 		$("#addimg").on("click", function(){
 			var image = new AddImage(
@@ -106,16 +109,16 @@ module.exports = (function(){
 		this.el.style.top = (event.y - (this.offsetY)) + "px";
 	};
 
-	/*function AddImage(x, y){ 
+	function AddVideo(x, y){ 
 		console.log('created new block');
 		this.el = document.createElement('div');
-		this.el.classList.add('image');
+		this.el.classList.add('video');
 		this.el.style.left = x+"px";
 		this.el.style.top = y+"px";
 		this.el.addEventListener('mousedown', this.mouseDownHandler.bind(this));
 	}
 	
-	AddImage.prototype.mouseDownHandler = function(event){
+	AddVideo.prototype.mouseDownHandler = function(event){
 		
 		console.log(event);
 		//this.el.style.zIndex = 10;
@@ -128,7 +131,7 @@ module.exports = (function(){
 		this.el.style.zIndex = 100;	
 	};
 	
-	AddImage.prototype.mouseUpHandler = function(event){
+	AddVideo.prototype.mouseUpHandler = function(event){
 		console.log('mouseup');
 		console.log(event);
 		window.removeEventListener('mousemove', this._mouseMoveHandler);
@@ -136,12 +139,12 @@ module.exports = (function(){
 		this.el.style.zIndex = 0;
 	};
 	
-	AddImage.prototype.mouseMoveHandler = function(event){
+	AddVideo.prototype.mouseMoveHandler = function(event){
 		console.log(this);
 		console.log(event);
 		this.el.style.left = (event.x - (this.offsetX)) + "px";
 		this.el.style.top = (event.y - (this.offsetY)) + "px";
-	};*/
+	};
 
 	return WhiteboardApplication;
 })();

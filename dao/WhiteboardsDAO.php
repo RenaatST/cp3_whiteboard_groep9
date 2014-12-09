@@ -30,6 +30,7 @@ class WhiteboardsDAO extends DAO {
     }
 
 
+
     function getWhiteboardsByUserId($user_id){
 
         $sql = "SELECT wb.id, wb.title, users.username, users.email, users.profile_image, users.role_id
@@ -43,6 +44,22 @@ class WhiteboardsDAO extends DAO {
             $whiteboardsById = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if(!empty($whiteboardsById)){
                 return $whiteboardsById;
+            }
+        }
+        return array();
+    }
+
+    function getUserForBoard($user_id, $board_id){
+
+        $sql = "SELECT *  FROM `boardusers` WHERE `user_id` = :user_id AND `board_id` = :board_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":user_id",$user_id);
+        $stmt->bindValue(":board_id",$board_id);
+        if($stmt->execute())
+        {
+            $useratboard = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($useratboard)){
+                return $useratboard;
             }
         }
         return array();
@@ -90,6 +107,55 @@ class WhiteboardsDAO extends DAO {
         $stmt->bindValue(":xPos",$xPos);
         $stmt->bindValue(":yPos",$yPos);
         $stmt->execute();
+    }
+
+    function addParticipant($user_id, $board_id) {
+
+        $sql = "INSERT INTO `whiteboard`.`boardusers` (`id`, `user_id`, `board_id`) VALUES (NULL, $user_id, $board_id)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":user_id",$user_id);
+        $stmt->bindValue(":board_id",$board_id);
+        $stmt->execute();
+    }
+
+
+    public function participatingUserByBoard($board, $user_id) {
+        $sql = "SELECT  boardusers.id, boardusers.user_id, users.username, users.email, users.profile_image, users.role_id
+                FROM boardusers
+                LEFT JOIN users ON boardusers.user_id = users.id
+                WHERE boardusers.board_id = $board AND boardusers.user_id != $user_id
+                GROUP BY user_id
+                ORDER BY boardusers.creation_date DESC";
+        $stmt = $this->pdo->prepare($sql);
+        if($stmt->execute())
+        {
+            $particpatingUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($particpatingUsers)){
+
+
+
+                return $particpatingUsers;
+            }
+        }
+        return array();
+    }
+
+    public function overviewBoardsIParticipateIn($user_id) {
+        $sql = "SELECT  boardusers.id, boardusers.user_id, whiteboard.title, whiteboard.date_added, whiteboard.creator_id
+                FROM boardusers
+                LEFT JOIN whiteboard ON boardusers.board_id = whiteboard.id
+                WHERE boardusers.user_id = $user_id
+                GROUP BY board_id
+                ORDER BY boardusers.creation_date DESC";
+        $stmt = $this->pdo->prepare($sql);
+        if($stmt->execute())
+        {
+            $particpatingBoards = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($particpatingBoards)){
+                return $particpatingBoards;
+            }
+        }
+        return array();
     }
 
     function getImagesByBoardId($whiteboard_id){

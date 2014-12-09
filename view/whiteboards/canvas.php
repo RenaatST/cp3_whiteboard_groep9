@@ -1,11 +1,12 @@
 <section id="canvaspagina">
-	<div class="canvaszelf" id="cnvszelf">
-		<nav id="whiteboardnav">
-			<h4><?php echo ucwords($whiteboard["title"]);?></h4>
+    <nav id="whiteboardnav">
+            <h4><?php echo ucwords($whiteboard["title"]);?></h4>
                 <button id="addimg" name="btnimage" class="btn btn-sm btn-success">Add image</button>
                 <button id="addvideo" name="btnvideo" class="btn btn-sm btn-success">Add video</button>
-                <button id="addnote" name="btnnote" class="btn btn-sm btn-success">Add note</button>	
+                <button id="addnote" name="btnnote" class="btn btn-sm btn-success">Add note</button>    
         </nav>
+	<div class="canvaszelf" id="cnvszelf">
+		
 
 		<?php
                 if(empty($images)){
