@@ -1,5 +1,5 @@
 <section id="canvaspagina">
-	<div class="canvaszelf">
+	<div class="canvaszelf" id="cnvszelf">
 		<nav id="whiteboardnav">
 			<h4><?php echo ucwords($whiteboard["title"]);?></h4>
                 <button id="addimg" name="btnimage" class="btn btn-sm btn-success">Add image</button>

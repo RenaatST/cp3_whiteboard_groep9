@@ -7,8 +7,6 @@ module.exports = (function(){
 	function DragAndDropHandler() {
 		$(".note").on("mousedown",this.mouseDownHandler).bind(this);
 
-
-
         if (window.File && window.FileReader && window.FileList && window.Blob) {
 			initImages();
 		} else {
@@ -114,6 +112,8 @@ module.exports = (function(){
 	DragAndDropHandler.prototype.mousemoveHandler = function(e) {
 		/*this.el.style.left = (e.x - this.offsetX) +"px";
         this.el.style.top = (e.y - this.offsetY) +"px";*/
+
+        
 	}
 
 
