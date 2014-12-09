@@ -9,6 +9,7 @@
                     echo "<p>No users in database</p>";
                 }
                 else{
+
                     foreach ($users as $user) {
                         if($user["username"] == $_SESSION["user"]["username"]){
                             echo "<li><a href='index.php?page=userdetail&userid={$user["id"]}'>{$user["username"]}</a>  -- {$user["email"]} ** ME **</li>";

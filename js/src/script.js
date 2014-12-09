@@ -1,11 +1,10 @@
 (function(){
 	
-	var UserHandler = require("./classes/UserHandler");
-	var DragAndDropHandler = require("./classes/DragAndDropHandler");
+	var WhiteboardApplication = require("./classes/WhiteboardApplication");
 
 	function init() {
-		new UserHandler();
-		new DragAndDropHandler();
+	
+		new WhiteboardApplication();
 	}
 
 	init();

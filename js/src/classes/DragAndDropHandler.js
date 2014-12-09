@@ -5,21 +5,14 @@ module.exports = (function(){
 	var el;
 
 	function DragAndDropHandler() {
+		$(".note").on("mousedown",this.mouseDownHandler).bind(this);
 
-		this.items = document.querySelectorAll("div[class=images]");
 
-        for(var i = 0; i < this.items.length; i++) {
-          //this.addEventListener('mousedown', this.mouseDownHandler.bind(this));
-          console.log(this.items[i]);
-          this.items[i] = this.el;
-          this.items[i].addEventListener('click', this.mouseDownHandler.bind(this));
-        }
 
         if (window.File && window.FileReader && window.FileList && window.Blob) {
 			initImages();
 		} else {
-			
-			
+
 		}
 	}
 
@@ -29,7 +22,7 @@ module.exports = (function(){
 		//[].forEach.call( imageinputs, initimageinput());
 		
 		for(var i = 0; i < imageinputs.length; i++){
-			console.log(imageinputs[i]);
+			//console.log(imageinputs[i]);
 			
 			initimageinput(imageinputs[i]);
 
@@ -37,6 +30,8 @@ module.exports = (function(){
 		
 	}
 	
+
+	//NIET WEGDOEN
 	function initimageinput(el){
 		el.classList.add('image-input-js');
 		
@@ -94,55 +89,40 @@ module.exports = (function(){
 					}
 				};
 			  })(f);
-
 			  // Read in the image file as a data URL.
 			  reader.readAsDataURL(f);
 			}
-			
-			
-			
 		});
+	}
 
-		
+	DragAndDropHandler.prototype.mouseDownHandler = function(e) {
+		this.el = this;
+		//offsets opslaan
+		console.log(this.el);
+		this.offsetX = event.offsetX;
+		this.offsetY = event.offsetY;
+
+		this._mousemoveHandler = this.mousemoveHandler;
+        this._mouseupHandler = this.mouseupHandler;
+
+		$(window).on("mousemove", this._mousemoveHandler);
+		$(window).on("mouseup", this.mouseupHandler);
 
 	}
 
-	DragAndDropHandler.prototype.clikchandler = function(event){
 
-		console.log(this);
+	DragAndDropHandler.prototype.mousemoveHandler = function(e) {
+		/*this.el.style.left = (e.x - this.offsetX) +"px";
+        this.el.style.top = (e.y - this.offsetY) +"px";*/
+	}
 
 
-	};
+	DragAndDropHandler.prototype.mouseupHandler = function(e) {
+		console.log("this");
+		/*$(window).on("mousemove",this._mousemoveHandler);
+        $(window).on("mouseup",this._mouseupHandler);*/
+	}
 
-
-	DragAndDropHandler.prototype.mouseDownHandler = function(event){
-		
-		console.log(this.el);
-		this.el.style.zIndex = ++teller;
-		//this.el.style.zIndex = 10;
-		this.offsetX = event.offsetX;
-		this.offsetY = event.offsetY;
-		this._mouseMoveHandler = this.mouseMoveHandler.bind(this);
-		this._mouseUpHandler = this.mouseUpHandler.bind(this);
-		window.addEventListener('mousemove', this._mouseMoveHandler);
-		window.addEventListener('mouseup', this._mouseUpHandler);	
-	};
-	
-	DragAndDropHandler.prototype.mouseUpHandler = function(event){
-		console.log('mouseup');
-		console.log(event);
-		window.removeEventListener('mousemove', this._mouseMoveHandler);
-		window.removeEventListener('mouseup', this._mouseUpHandler);
-		this.el.style.zIndex = 0;
-	};
-	
-	DragAndDropHandler.prototype.mouseMoveHandler = function(event){
-		console.log(this);
-		console.log(event);
-		this.el.style.left = (event.x - (this.offsetX)) + "px";
-		this.el.style.top = (event.y - (this.offsetY)) + "px";
-	};
-	
 
 	return DragAndDropHandler;
 })();

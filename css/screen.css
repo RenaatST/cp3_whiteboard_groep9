@@ -131,9 +131,14 @@ nav {
     cursor: move;
 
 }
+.note {
+     position: absolute;
+     width: 180px;
+     background-color: #F3E595;
+     height: 200px;
+}
 
 .note textarea {
-    position: absolute;
     width: 180px;
     height: 200px;
     border: none;
@@ -145,7 +150,7 @@ nav {
 
 
 
-.form-group {
+.form-group-canvas {
     overflow: hidden;
     margin-bottom: 10px;
     position: absolute;
@@ -165,5 +170,9 @@ nav {
     background-position: center center;
 }
 
-
+.dragarea {
+    width: 40px;
+    height: 40px;
+    background-color: black;
+}
 
