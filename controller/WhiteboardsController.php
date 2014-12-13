@@ -69,9 +69,30 @@ class WhiteboardsController extends Controller {
 
         
 
-        if(!empty($_POST) && !empty($_POST['btnimage'])){
-            $this->whiteboardsDAO->addImage("image","image",$_GET["boardid"], $randx, $randy);
-        }
+        if(!empty($_SESSION["user"])) {
+        	if(!empty($_POST) && strtolower($_POST["submitimage"]) == "submit"){
+				if(!empty($_FILES["imageInput1"])){
+					$type = $_FILES['imageInput1']['type'];
+	                if(($type == "image/gif")
+	                    || ($type == "image/jpeg")
+	                    || ($type == "image/jpg")
+	                    || ($type == "image/JPG")
+	                    || ($type == "image/png")){
+
+
+	                    $filename = $_FILES['imageInput1']['name'];
+	                    $path = WWW_ROOT . 'uploads' . DS . $filename;
+	                    move_uploaded_file($_FILES['imageInput1']['tmp_name'], $path);
+
+						$this->whiteboardsDAO->addImage($filename,$filename,$_GET["boardid"], $randx, $randy);
+                   	    $this->redirect("index.php?page=canvaspage&boardid=" . $_GET["boardid"]);
+
+					}
+
+
+				}
+			}
+		}
 
 
         $images = $this->whiteboardsDAO->getImagesByBoardId($_GET["boardid"]);

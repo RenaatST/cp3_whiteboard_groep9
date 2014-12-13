@@ -6,6 +6,16 @@
                 <button id="addnote" name="btnnote" class="btn btn-sm btn-success">Add note</button>    
         </nav>
 	<div class="canvaszelf" id="cnvszelf">
+
+
+        <form method='post' action=''  enctype="multipart/form-data">
+            <div class='form-group-canvas image-input' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'>
+                <input type='file' id='imageInput1' name='imageInput1' class='form-control' />
+                <input type="submit" name="submitimage" value="submit" />
+            </div>
+        </form>
+
+
 		
 
 		<?php
@@ -13,13 +23,8 @@
                 }
                 else{
                     foreach ($images as $image) {
-                        /*echo "<div id='image{$image["id"]}' class='images' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'>&nbsp;</div>";*/
-                        echo "<form method='post' action=''>
-                                <div class='form-group-canvas image-input' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'>
-                                    <input type='file' id='imageInput1' name='imageInput1' class='form-control' />
-                                </div>
-                            </form>";
-
+                        //echo "<div id='image{$image["id"]}' class='images' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'>&nbsp;</div>";
+                        echo "<img src='uploads/{$image["title"]}' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'/>";
                     }
                 }
         ?>

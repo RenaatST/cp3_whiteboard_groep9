@@ -7,7 +7,7 @@ module.exports = (function(){
 
 		
 		
-		//clickevents maken voor de knoppen van adden dinges.
+		/*//clickevents maken voor de knoppen van adden dinges.
 		$("#addimg").on("click", function(){
 			var image = new AddImage(
 				Math.random() * window.innerWidth,
@@ -29,7 +29,7 @@ module.exports = (function(){
 				Math.random() * window.innerHeight
 			);
 			document.getElementById('cnvszelf').appendChild(note.el);
-		});
+		});*/
 		
 	}
 
