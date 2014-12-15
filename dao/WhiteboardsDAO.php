@@ -154,7 +154,7 @@ class WhiteboardsDAO extends DAO {
     }
 
     public function overviewBoardsIParticipateIn($user_id) {
-        $sql = "SELECT  boardusers.id, boardusers.user_id, whiteboard.title, whiteboard.date_added, whiteboard.creator_id
+        $sql = "SELECT boardusers.id, boardusers.board_id, boardusers.user_id, whiteboard.title, whiteboard.date_added, whiteboard.creator_id
                 FROM boardusers
                 LEFT JOIN whiteboard ON boardusers.board_id = whiteboard.id
                 WHERE whiteboard.creator_id != boardusers.user_id
