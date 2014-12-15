@@ -7,9 +7,8 @@ module.exports = (function(){
 	function WhiteboardApplication() {
 
 		$("#addnote").on("click",this.addNote.bind(this));
-		$("#addvideo").on("click",this.addvideo.bind(this));
+		$("#videosubmit").on("click",this.addvideo.bind(this));
 		$("#addimg").on("click",this.addimage.bind(this));
-
 
 		if(GetURLParameter("page") === "canvaspage") {
 			this.getData();
@@ -66,7 +65,9 @@ module.exports = (function(){
 	  .done(this.getData());
 	};
 
-	WhiteboardApplication.prototype.addvideo = function() {
+	WhiteboardApplication.prototype.addvideo = function(event) {
+		event.preventDefault();
+		console.log(this);
 		var boardid = GetURLParameter("boardid");
 		$.post( "index.php?page=addnote", { 
 			text: 'tekst',
