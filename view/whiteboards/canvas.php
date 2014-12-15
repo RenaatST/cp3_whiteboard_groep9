@@ -16,11 +16,11 @@
     {{/each}}
 </script>
 
-<script type="text/template" id="postit-template">
+<script type="text/template" id="image-template">
     {{#each images}}
-        <div class="drag-drop postit" style="left:{{xPos}}px; top:{{yPos}}px;" data-id="{{id}}" data-set="{{whiteboard_id}}" data-item="image">
+        <div class="drag-drop image" style="left:{{xPos}}px; top:{{yPos}}px;" data-id="{{id}}" data-set="{{whiteboard_id}}" data-item="image">
             <span class="deletebtn" data-id="{{id}}"></span>
-            <img src="{{}}">;
+            <img src="{{}}">;   
         </div>
     {{/each}}
 </script>
