@@ -1,149 +1,101 @@
 module.exports = (function(){
 
-	var WhiteboardHandler = require('./WhiteboardHandler');
+	var DragAndDropHandler = require("./DragAndDropHandler.js");
 	var teller = 0;
 
-	function WhiteboardApplication()	 {
 
+	function WhiteboardApplication() {
+
+		$("#addnote").on("click",this.addNote.bind(this));
+		$("#addvideo").on("click",this.addvideo.bind(this));
+		$("#addimg").on("click",this.addimage.bind(this));
+
+
+		if(GetURLParameter("page") === "canvaspage") {
+			this.getData();
+		}
 		
 		
-		/*//clickevents maken voor de knoppen van adden dinges.
-		$("#addimg").on("click", function(){
-			var image = new AddImage(
-				Math.random() * window.innerWidth,
-				Math.random() * window.innerHeight
-			);
-			document.getElementById('cnvszelf').appendChild(image.el);
-		});
-		$("#addvideo").on("click", function(){
-			var video = new AddVideo(
-				Math.random() * window.innerWidth,
-				Math.random() * window.innerHeight
-			);
-			document.getElementById('cnvszelf').appendChild(video.el);
-		});
-		//$("#addnote").on("click", this.addNote);
-		$("#addnote").on("click", function(){
-			var note = new AddNote(
-				Math.random() * window.innerWidth,
-				Math.random() * window.innerHeight
-			);
-			document.getElementById('cnvszelf').appendChild(note.el);
-		});*/
-		
+
 	}
 
-	function AddNote(x, y){ 
-		console.log('created new block');
-		this.el = document.createElement('div');
-		this.el.classList.add('note');
-		this.el.style.left = x+"px";
-		this.el.style.top = y+"px";
-		this.el.addEventListener('mousedown', this.mouseDownHandler.bind(this));
-	}
-	
-	AddNote.prototype.mouseDownHandler = function(event){
-		
-		console.log(event);
-		//this.el.style.zIndex = 10;
-		this.offsetX = event.offsetX;
-		this.offsetY = event.offsetY;
-		this._mouseMoveHandler = this.mouseMoveHandler.bind(this);
-		this._mouseUpHandler = this.mouseUpHandler.bind(this);
-		window.addEventListener('mousemove', this._mouseMoveHandler);
-		window.addEventListener('mouseup', this._mouseUpHandler);	
-		this.el.style.zIndex = 100;	
 
-	};
-	
-	AddNote.prototype.mouseUpHandler = function(event){
-		console.log('mouseup');
-		console.log(event);
-		window.removeEventListener('mousemove', this._mouseMoveHandler);
-		window.removeEventListener('mouseup', this._mouseUpHandler);
-		this.el.style.zIndex = 0;
-	};
-	
-	AddNote.prototype.mouseMoveHandler = function(event){
-		console.log(this);
-		console.log(event);
-		this.el.style.left = (event.x - (this.offsetX)) + "px";
-		this.el.style.top = (event.y - (this.offsetY)) + "px";
+	function GetURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    	for (var i = 0; i < sURLVariables.length; i++) {
+	        var sParameterName = sURLVariables[i].split('=');
+	        if (sParameterName[0] == sParam) {
+	            return sParameterName[1];
+	        }
+	    }
+	}	
+
+	WhiteboardApplication.prototype.updateNote = function() {
+		var boardid = GetURLParameter("boardid");
+		$.post( "index.php?page=canvas&boardid="+boardid+"&action=updateNote", { 
+			text: '',
+			whiteboard_id: boardid,
+			xpos: 300,
+			ypos: 300,
+		})
+	  .done(this.getData());
+	};	 
+
+	WhiteboardApplication.prototype.addNote = function() {
+		var boardid = GetURLParameter("boardid");
+		$.post( "index.php?page=canvas&boardid="+boardid+"&action=addNote", { 
+			text: '',
+			whiteboard_id: boardid,
+			xpos: 400,
+			ypos: 300,
+		})
+	  .done(this.getData());
 	};
 
-
-	function AddImage(x, y){ 
-		console.log('created new block');
-		this.el = document.createElement('div');
-		this.el.classList.add('image');
-		this.el.style.left = x+"px";
-		this.el.style.top = y+"px";
-		this.el.addEventListener('mousedown', this.mouseDownHandler.bind(this));
-	}
-	
-	AddImage.prototype.mouseDownHandler = function(event){
-		
-		console.log(event);
-		//this.el.style.zIndex = 10;
-		this.offsetX = event.offsetX;
-		this.offsetY = event.offsetY;
-		this._mouseMoveHandler = this.mouseMoveHandler.bind(this);
-		this._mouseUpHandler = this.mouseUpHandler.bind(this);
-		window.addEventListener('mousemove', this._mouseMoveHandler);
-		window.addEventListener('mouseup', this._mouseUpHandler);
-		this.el.style.zIndex = 100;	
-	};
-	
-	AddImage.prototype.mouseUpHandler = function(event){
-		console.log('mouseup');
-		console.log(event);
-		window.removeEventListener('mousemove', this._mouseMoveHandler);
-		window.removeEventListener('mouseup', this._mouseUpHandler);
-		this.el.style.zIndex = 0;
-	};
-	
-	AddImage.prototype.mouseMoveHandler = function(event){
-		console.log(this);
-		console.log(event);
-		this.el.style.left = (event.x - (this.offsetX)) + "px";
-		this.el.style.top = (event.y - (this.offsetY)) + "px";
+	WhiteboardApplication.prototype.addvideo = function() {
+		var boardid = GetURLParameter("boardid");
+		$.post( "index.php?page=addnote", { 
+			text: 'tekst',
+			whiteboard_id: boardid,
+			xpos: 300,
+			ypos: 300,
+		})
+	  .done(function( data ) {
+	    console.log(data);
+	  });
 	};
 
-	function AddVideo(x, y){ 
-		console.log('created new block');
-		this.el = document.createElement('div');
-		this.el.classList.add('video');
-		this.el.style.left = x+"px";
-		this.el.style.top = y+"px";
-		this.el.addEventListener('mousedown', this.mouseDownHandler.bind(this));
-	}
-	
-	AddVideo.prototype.mouseDownHandler = function(event){
-		
-		console.log(event);
-		//this.el.style.zIndex = 10;
-		this.offsetX = event.offsetX;
-		this.offsetY = event.offsetY;
-		this._mouseMoveHandler = this.mouseMoveHandler.bind(this);
-		this._mouseUpHandler = this.mouseUpHandler.bind(this);
-		window.addEventListener('mousemove', this._mouseMoveHandler);
-		window.addEventListener('mouseup', this._mouseUpHandler);
-		this.el.style.zIndex = 100;	
+	WhiteboardApplication.prototype.addimage = function() {
+		var boardid = GetURLParameter("boardid");
+		$.post( "index.php?page=addnote", { 
+			text: 'tekst',
+			whiteboard_id: boardid,
+			xpos: 300,
+			ypos: 300,
+		})
+	  .done(function( data ) {
+	    console.log(data);
+	  });
 	};
-	
-	AddVideo.prototype.mouseUpHandler = function(event){
-		console.log('mouseup');
-		console.log(event);
-		window.removeEventListener('mousemove', this._mouseMoveHandler);
-		window.removeEventListener('mouseup', this._mouseUpHandler);
-		this.el.style.zIndex = 0;
-	};
-	
-	AddVideo.prototype.mouseMoveHandler = function(event){
-		console.log(this);
-		console.log(event);
-		this.el.style.left = (event.x - (this.offsetX)) + "px";
-		this.el.style.top = (event.y - (this.offsetY)) + "px";
+
+	WhiteboardApplication.prototype.getData = function() {
+		console.log("getdata");
+		var boardid = GetURLParameter("boardid");
+		$.get("index.php?page=data",{"boardid":boardid})
+  			.done(function(data) {
+
+
+
+  				var postTemplateSrc = $('#postit-template').text();
+				var postTemplate = Handlebars.compile( postTemplateSrc );
+
+				var result = postTemplate(data);		
+				$('.canvaszelf').append($(result));
+				new DragAndDropHandler();
+
+  			});
+
 	};
 
 	return WhiteboardApplication;

@@ -7,7 +7,6 @@ var stylish 	= require('jshint-stylish');
 var uglify 		= require('gulp-uglify');
 var buffer 		= require('vinyl-buffer');
 var sourcemaps  = require('gulp-sourcemaps');
-var compass = require('gulp-compass');
 var path = require('path');
 var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
@@ -26,7 +25,7 @@ gulp.task('lint', function() {
 
 gulp.task('browserify', ['lint', 'compress'], function(){ 
 	var bundler = browserify({
-		entries: ['./js/src/script.js'], debug:true 
+		entries: ['./js/src/script.js']	 
 	});
 
 	return bundler.bundle() 
@@ -39,7 +38,7 @@ gulp.task('browserify', ['lint', 'compress'], function(){
 		.pipe(source('script.dist.js')) 
 		.pipe(buffer())
 		.pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
+        //.pipe(uglify())
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('./js'));
 });
@@ -48,21 +47,8 @@ gulp.task('browserify', ['lint', 'compress'], function(){
 gulp.task('compress', function() {
 
   gulp.src('js/script.dist.js')
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest('dist'))
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

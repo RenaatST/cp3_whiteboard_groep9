@@ -74,11 +74,22 @@ class WhiteboardsDAO extends DAO {
          $stmt->execute();
     }
 
-    function addNote($title, $text, $whiteboard_id, $xPos, $yPos) {
+    function updateNote($id,$xPos,$yPos,$text) {
+         $sql = "UPDATE postits SET `xPos` = :xPos , `yPos` = :yPos , `text` = :text WHERE `id` = :id";
+         $stmt = $this->pdo->prepare($sql);
+         $stmt->bindValue(":id",$id);
+         $stmt->bindValue(":text",$text);
+         $stmt->bindValue(":xPos",$xPos);
+         $stmt->bindValue(":yPos",$yPos);
+         if($stmt->execute()) {
+            var_dump("worked");
+         };
+    }
 
-        $sql = "INSERT INTO postits (title, text, whiteboard_id, xPos, yPos) VALUES (:title, :text, :whiteboard_id, :xPos, :yPos)";
+    function addNote( $text, $whiteboard_id, $xPos, $yPos) {
+
+        $sql = "INSERT INTO postits ( text, whiteboard_id, xPos, yPos) VALUES (:text, :whiteboard_id, :xPos, :yPos)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(":title",$title);
         $stmt->bindValue(":text",$text);
         $stmt->bindValue(":whiteboard_id",$whiteboard_id);
         $stmt->bindValue(":xPos",$xPos);
@@ -173,7 +184,6 @@ class WhiteboardsDAO extends DAO {
     }
 
     function getNotesByBoardId($whiteboard_id){
-
         $sql = "SELECT * FROM postits WHERE whiteboard_id = $whiteboard_id";
         $stmt = $this->pdo->prepare($sql);
         if($stmt->execute())
