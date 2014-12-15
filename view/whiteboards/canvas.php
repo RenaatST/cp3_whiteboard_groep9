@@ -19,7 +19,7 @@
 		
 
 		<?php
-                if(empty($images)){
+                if(empty($images))
                 }
                 else{
                     foreach ($images as $image) {
