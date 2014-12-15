@@ -88,6 +88,7 @@ class UsersController extends Controller {
 					));
 				if(!empty($user)) {
 					$_SESSION["info"] = "registration was succesful";
+					$_SESSION["user"] = $user;
 					$this->redirect("index.php");
 				}
 			}
