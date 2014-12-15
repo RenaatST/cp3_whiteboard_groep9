@@ -97,14 +97,16 @@ class WhiteboardsDAO extends DAO {
         $stmt->execute();
     }
 
-    function addVideo($title, $description, $video_id, $whiteboard_id) {
+    function addVideo($title, $description, $video_id, $whiteboard_id, $xPos, $yPos) {
 
-        $sql = "INSERT INTO videos (title, description, video_id whiteboard_id) VALUES (:title, :description, :video_id :whiteboard_id)";
+        $sql = "INSERT INTO videos (title, description, video_id, whiteboard_id, xPos, yPos) VALUES (:title, :description, :video_id, :whiteboard_id, :xPos, :yPos)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":title",$title);
         $stmt->bindValue(":description",$description);
         $stmt->bindValue(":video_id",$video_id);
         $stmt->bindValue(":whiteboard_id",$whiteboard_id);
+        $stmt->bindValue(":xPos",$xPos);
+        $stmt->bindValue(":yPos",$yPos);
         $stmt->execute();
     }
 

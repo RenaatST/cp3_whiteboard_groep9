@@ -98,6 +98,7 @@ class WhiteboardsController extends Controller {
 				$this->whiteboardsDAO->addVideo("video","video", "video" ,$_GET["boardid"]);
 			}
 
+			///////////////////////// ADD IMAGE ///////////////////////////
 			
 
 			if(!empty($_SESSION["user"])) {
@@ -121,6 +122,28 @@ class WhiteboardsController extends Controller {
 					}
 
 
+				}
+			}
+
+			///////////////////////// ADD VIDEO ///////////////////////////
+
+			if(!empty($_SESSION["user"])) {
+	        	if(!empty($_POST) && strtolower($_POST["submitimage"]) == "submit"){
+					if(!empty($_FILES["imageInput1"])){
+						$type = $_FILES['imageInput1']['type'];
+		                if(($type == "image/gif") || ($type == "video/mp4")){
+
+		                    $filename = $_FILES['imageInput1']['name'];
+		                    $path = WWW_ROOT . 'uploads' . DS . $filename;
+		                    move_uploaded_file($_FILES['imageInput1']['tmp_name'], $path);
+
+							$this->whiteboardsDAO->addVideo($filename,$filename, '1' ,$_GET["boardid"], $randx, $randy);
+							$this->redirect("index.php?page=canvaspage&boardid=" . $_GET["boardid"]);
+
+						}
+
+
+					}
 				}
 			}
 		}
