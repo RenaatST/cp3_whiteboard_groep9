@@ -26,34 +26,4 @@
 </script>
 
 
-
-  
-    
-    <?php
-        /*
-                if(empty($images)){
-                }
-                else{
-                    foreach ($images as $image) {
-                        //echo "<div id='image{$image["id"]}' class='images' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'>&nbsp;</div>";
-                        echo "<img src='uploads/{$image["title"]}' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'/>";
-                    }
-                }
-                */
-                ?>
-                <?php
-        /*
-                if(empty($notes)){
-                }
-                else{
-                    foreach ($notes as $note) {
-                        echo "<form class='note' action='' method='' style='left:{$note["xPos"]}px;top:{$note["yPos"]}px;'>
-                            <textarea rows='4' cols='50' maxlength='259'></textarea>
-                        </form>";
-
-                    }
-                }
-                */
-                ?>
-            </div>
-        </section>
+</section>
