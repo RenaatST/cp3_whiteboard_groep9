@@ -48,7 +48,11 @@ $routes = array(
     'canvas' => array(
         'controller' => 'Whiteboards',
         'action' => 'canvas'
-    )
+    ),
+    'data' => array(
+        'controller' => 'Whiteboards',
+        'action' => 'data'
+    ),
 );
 
 if(empty($_GET['page'])) {
