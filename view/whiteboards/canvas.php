@@ -4,6 +4,12 @@
         <button id="addimg" name="btnimage" class="btn btn-sm btn-success">Add image</button>
         <button id="addvideo" name="btnvideo" class="btn btn-sm btn-success">Add video</button>
         <button id="addnote" name="btnnote" class="btn btn-sm btn-success">Add note</button>    
+        <form method='post' action=''  enctype="multipart/form-data">
+            <div class='form-group-canvas image-input' style='left:{$image["xPos"]}px;top:{$image["yPos"]}px;'>
+                <input type='file' id='imageInput1' name='imageInput1' class='form-control' />
+                <input type="submit" name="submitimage" value="submit" />
+            </div>
+        </form> 
     </nav>
     <div class="canvaszelf" id="cnvszelf">
 
