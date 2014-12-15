@@ -186,7 +186,7 @@ public function detail() {
 
 
 
-	if(!empty($_GET["action"]) && $_GET ["action"] == "addusertoboard" && !empty($_SESSION["user"])) {
+	if(!empty($_GET["action"]) && $_GET["action"] == "addusertoboard" && !empty($_SESSION["user"])) {
 		$this->whiteboardsDAO->addParticipant($_GET["userid"], $_GET["id"]);
 		$this->redirect("index.php?page=boarddetail&id=" . $_GET["id"]);
 	}
