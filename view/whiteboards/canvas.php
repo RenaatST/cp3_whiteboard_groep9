@@ -24,6 +24,4 @@
         </div>
     {{/each}}
 </script>
-
-
 </section>
