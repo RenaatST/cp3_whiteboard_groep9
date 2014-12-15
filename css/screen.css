@@ -185,8 +185,24 @@ nav {
 }
 
 .postit {
-    height: 300px;
-    width: 300px;
-    background-color: yellow;
+    height: 200px;
+    width: 190px;
+    background-color: #F3F595;
     position: absolute;
+    -webkit-box-shadow: 2px 2px 10px 0px rgba(50, 50, 50, 0.45);
+    -moz-box-shadow:    2px 2px 10px 0px rgba(50, 50, 50, 0.45);
+    box-shadow:         2px 2px 10px 0px rgba(50, 50, 50, 0.45);
 }
+
+.postit:hover {
+    cursor: move;
+
+}
+
+
+
+
+
+
+
+
