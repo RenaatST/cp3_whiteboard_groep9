@@ -9,14 +9,28 @@
 </head>
 <body>
 
-    <!-- MODAL!! -->
-    <div class="modal fade bs-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <!-- MODAL VIDEO -->
+    <div class="modal fade bs-example-modal-sm" id="videomodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-        <form class="form-main" action="index.php?page=canvaspage&boardid=<?php $_GET["boardid"]?>&action=addVideo" method="post" enctype="multipart/form-data">
+        <form class="form-main" id="videosubmit" action="index.php?page=canvaspage&boardid=<?php $_GET["boardid"]?>&action=addVideo" method="post" enctype="multipart/form-data">
             <label for="file"><span>Filename:</span></label>
             <input type="file" name="file" id="file" /> 
-            <input type="submit" id="videosubmit" name="submit" value="Submit" />
+            <input type="submit" name="submit" value="Submit" />
+        </form> 
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL VIDEO -->
+    <div class="modal fade bs-example-modal-sm" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+        <form class="form-main" id="imagesubmit" action="index.php?page=canvaspage&boardid=<?php $_GET["boardid"]?>&action=addimage" method="post" enctype="multipart/form-data">
+            <label for="file"><span>Filename:</span></label>
+            <input type="file" name="file" id="file" /> 
+            <input type="submit" name="submit" value="Submit" />
         </form> 
     </div>
   </div>
@@ -30,7 +44,6 @@
         </ul>
         <?php } ?>
         <div class="nav navbar-right">
-            <!-- TOON LOGIN FORM & REGISTER LINK ENKEL INDIEN NIET INGELOGD -->
             <?php 
             if(empty($_SESSION["user"])){
                 ?>
@@ -46,7 +59,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index.php?page=register">Register</a></li>
                 </ul>
-                <!-- TOON LOGOUT ENKEL INDIEN WEL INGELOGD -->
                 <?php
             }   
             if(!empty($_SESSION["user"])){

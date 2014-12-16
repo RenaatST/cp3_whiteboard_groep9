@@ -190,3 +190,16 @@ nav {
     background-color: yellow;
     position: absolute;
 }
+.postit p {
+    height: 100%;
+    width: 100%;
+}
+.video {
+    background-color: black;
+    position: absolute;
+}
+
+.image {
+    background-color: black;
+    position: absolute;
+}

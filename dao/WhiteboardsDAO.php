@@ -86,6 +86,28 @@ class WhiteboardsDAO extends DAO {
          };
     }
 
+    function updateVideo($id,$xpos,$ypos) {
+         $sql = "UPDATE videos SET `xpos` = :xpos , `ypos` = :ypos WHERE `id` = :id";
+         $stmt = $this->pdo->prepare($sql);
+         $stmt->bindValue(":id",$id);
+         $stmt->bindValue(":xpos",$xpos);
+         $stmt->bindValue(":ypos",$ypos);
+         if($stmt->execute()) {
+            var_dump("worked");
+         };
+    }
+
+    function updateImage($id,$xpos,$ypos) {
+         $sql = "UPDATE images SET `xpos` = :xpos , `ypos` = :ypos WHERE `id` = :id";
+         $stmt = $this->pdo->prepare($sql);
+         $stmt->bindValue(":id",$id);
+         $stmt->bindValue(":xpos",$xpos);
+         $stmt->bindValue(":ypos",$ypos);
+         if($stmt->execute()) {
+            var_dump("worked");
+         };
+    }
+
     function addNote( $text, $whiteboard_id, $xPos, $yPos) {
 
         $sql = "INSERT INTO postits ( text, whiteboard_id, xPos, yPos) VALUES (:text, :whiteboard_id, :xPos, :yPos)";
@@ -97,28 +119,24 @@ class WhiteboardsDAO extends DAO {
         $stmt->execute();
     }
 
-    function addVideo($title, $description, $video_id, $whiteboard_id, $xPos, $yPos) {
+    function addVideo( $whiteboard_id, $naam) {
 
-        $sql = "INSERT INTO videos (title, description, video_id, whiteboard_id, xPos, yPos) VALUES (:title, :description, :video_id, :whiteboard_id, :xPos, :yPos)";
+        $sql = "INSERT INTO videos (whiteboard_id, name, xpos,ypos) VALUES (:whiteboard_id, :name,:xpos,:ypos)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(":title",$title);
-        $stmt->bindValue(":description",$description);
-        $stmt->bindValue(":video_id",$video_id);
         $stmt->bindValue(":whiteboard_id",$whiteboard_id);
-        $stmt->bindValue(":xPos",$xPos);
-        $stmt->bindValue(":yPos",$yPos);
+        $stmt->bindValue(":name",$naam);
+        $stmt->bindValue(":xpos",400);
+        $stmt->bindValue(":ypos",400);
         $stmt->execute();
     }
 
-    function addImage($title, $image, $whiteboard_id, $xPos, $yPos) {
-
-        $sql = "INSERT INTO images (title, image, whiteboard_id, xPos, yPos) VALUES (:title, :image, :whiteboard_id, :xPos, :yPos)";
+    function addImage($title, $whiteboard_id) {
+        $sql = "INSERT INTO images (title, whiteboard_id, xPos, yPos) VALUES (:title, :whiteboard_id, :xPos, :yPos)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":title",$title);
-        $stmt->bindValue(":image",$image);
         $stmt->bindValue(":whiteboard_id",$whiteboard_id);
-        $stmt->bindValue(":xPos",$xPos);
-        $stmt->bindValue(":yPos",$yPos);
+        $stmt->bindValue(":xPos",400);
+        $stmt->bindValue(":yPos",400);
         $stmt->execute();
     }
 
@@ -170,6 +188,22 @@ class WhiteboardsDAO extends DAO {
         }
         return array();
     }
+
+    
+    function getVideosByBoardId($whiteboard_id){
+
+        $sql = "SELECT * FROM videos WHERE whiteboard_id = $whiteboard_id";
+        $stmt = $this->pdo->prepare($sql);
+        if($stmt->execute())
+        {
+            $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($images)){
+                return $images;
+            }
+        }
+        return array();
+    }
+
 
     function getImagesByBoardId($whiteboard_id){
 

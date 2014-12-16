@@ -29,7 +29,6 @@ module.exports = (function(){
 	Dragable.prototype.mouseUpHandler = function(event) {
 		window.removeEventListener("mousemove", this._mouseMoveHandler);
 		window.removeEventListener("mouseup", this._mouseUpHandler);
-		console.log(this.el.offsetLeft);
 		$.post( "index.php?page=canvas&boardid="+this.el.dataset.set+"&action=update", { 
 			id: this.el.dataset.id,
 			whiteboardid: this.el.dataset.set,
@@ -38,7 +37,6 @@ module.exports = (function(){
 			ypos: this.el.offsetTop,
 			text: this.el.childNodes[3].innerHTML
 		})
-	  .done(console.log("updated"));
 	};
 
 

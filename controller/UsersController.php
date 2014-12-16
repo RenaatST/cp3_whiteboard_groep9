@@ -1,23 +1,23 @@
 <?php
 require_once WWW_ROOT . 'controller' . DS . 'Controller.php';
 require_once WWW_ROOT . 'dao' . DS . 'UserDAO.php';
-require_once WWW_ROOT . 'dao' . DS . 'ImageDAO.php';
+
 
 require_once WWW_ROOT . 'phpass' . DS . 'Phpass.php';
 
 class UsersController extends Controller {
 
 	private $userDAO;
-	private $imageDAO;
+
 
 	function __construct() {
 		$this->userDAO = new UserDAO();
-		$this->imageDAO = new ImageDAO();
+
 	}
 
 	public function index() {
 		$this->set("users",$this->userDAO->selectAll());
-		$this->set("images",$this->imageDAO->selectAll());
+
 	}
 
 	public function view() {

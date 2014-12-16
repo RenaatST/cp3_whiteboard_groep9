@@ -1,10 +1,9 @@
 <section id="canvaspagina">
     <nav id="whiteboardnav">
         <h4><?php echo ucwords($whiteboard["title"]);?></h4>
-        <button id="addimg" name="btnimage" class="btn btn-sm btn-success">Add image</button>
-        <button id="addvideo" name="btnvideo" class="btn btn-sm btn-success">Add video</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imagemodal">add Image</button>
         <button id="addnote" name="btnnote" class="btn btn-sm btn-success">Add note</button>    
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">add Video</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#videomodal">add Video</button>
 
         </form> 
     </nav>
@@ -20,11 +19,21 @@
     {{/each}}
 </script>
 
-<script type="text/template" id="image-template">
+<script type="text/template" id="video-template">
+    {{#each videos}}
+        <div class="drag-drop video" style="left:{{xpos}}px; top:{{ypos}}px;" data-id="{{id}}" data-set="{{whiteboard_id}}" data-item="video">
+            <span class="deletebtn" data-id="{{id}}"></span>
+            <video width="400px" controls>
+                <source src="uploads/{{name}}" type="video/mp4">
+            </video>
+        </div>
+    {{/each}}
+
+    <script type="text/template" id="image-template">
     {{#each images}}
         <div class="drag-drop image" style="left:{{xPos}}px; top:{{yPos}}px;" data-id="{{id}}" data-set="{{whiteboard_id}}" data-item="image">
             <span class="deletebtn" data-id="{{id}}"></span>
-            <img src="{{}}">;   
+            <img src="uploads/{{title}}" draggable="false" alt="whiteboardimg">
         </div>
     {{/each}}
 </script>
