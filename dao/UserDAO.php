@@ -10,15 +10,6 @@ class UserDAO extends DAO {
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
-	public function selectAllWithImageCount() {
-		//gebruik query om alle users & hun aantal images per user op te halen
-		$sql = "SELECT `user_id`, max(images.`id`) as aantal FROM `images` INNER JOIN `users` ON `user_id` = images.`user_id`";
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute();
-		return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-	}
-
 	public function selectById($id) {
 		$sql = "SELECT * FROM `users` WHERE `id` = :id";
 		$stmt = $this->pdo->prepare($sql);

@@ -25,8 +25,9 @@
 		<?php if(empty($boardsIParticipateIn)): ?>
 				</br><p>No whiteboards you participate in yet</p>
 		<?php else: ?>
+
 			<?php foreach ($boardsIParticipateIn as $boardIParticipateIn): ?>
-					</br><a href="index.php?page=boarddetail&id=<?php echo $boardIParticipateIn['id']; ?>"><?php echo $boardIParticipateIn['title']; ?></a><br>
+					</br><a href="index.php?page=boarddetail&id=<?php echo $boardIParticipateIn['board_id']; ?>"><?php echo $boardIParticipateIn['title']; ?></a><br>
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</div>

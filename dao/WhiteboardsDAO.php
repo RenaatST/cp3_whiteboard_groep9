@@ -172,13 +172,13 @@ class WhiteboardsDAO extends DAO {
     }
 
     public function overviewBoardsIParticipateIn($user_id) {
-        $sql = "SELECT  boardusers.id, boardusers.user_id, whiteboard.title, whiteboard.date_added, whiteboard.creator_id
+        $sql = "SELECT boardusers.id, boardusers.board_id, boardusers.user_id, whiteboard.title, whiteboard.date_added, whiteboard.creator_id
                 FROM boardusers
                 LEFT JOIN whiteboard ON boardusers.board_id = whiteboard.id
-                WHERE boardusers.user_id = $user_id
-                GROUP BY board_id
-                ORDER BY boardusers.creation_date DESC";
+                WHERE whiteboard.creator_id != boardusers.user_id
+                AND boardusers.user_id = :user_id";
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":user_id",$user_id);
         if($stmt->execute())
         {
             $particpatingBoards = $stmt->fetchAll(PDO::FETCH_ASSOC);

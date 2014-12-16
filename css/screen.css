@@ -185,11 +185,15 @@ nav {
 }
 
 .postit {
-    height: 300px;
-    width: 300px;
-    background-color: yellow;
+    height: 200px;
+    width: 190px;
+    background-color: #F3F595;
     position: absolute;
+    -webkit-box-shadow: 2px 2px 10px 0px rgba(50, 50, 50, 0.45);
+    -moz-box-shadow:    2px 2px 10px 0px rgba(50, 50, 50, 0.45);
+    box-shadow:         2px 2px 10px 0px rgba(50, 50, 50, 0.45);
 }
+
 .postit p {
     height: 100%;
     width: 100%;
@@ -203,3 +207,17 @@ nav {
     background-color: black;
     position: absolute;
 }
+
+.postit:hover {
+    cursor: move;
+
+}
+
+
+
+
+
+
+
+
+>>>>>>> 031b23a3085940b7300dc14d6e8a5a1e593f5780
