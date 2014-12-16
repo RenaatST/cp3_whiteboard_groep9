@@ -18,13 +18,15 @@
             <p contenteditable="true">{{text}}</p>
         </div>
     {{/each}}
+    </div>
 </script>
-</div>
 
 
-<div class="videos">
+
+
 <script type="text/template" id="video-template">
     {{#each videos}}
+    <div class="videos">
         <div class="drag-drop video" style="left:{{xpos}}px; top:{{ypos}}px;" data-id="{{id}}" data-set="{{whiteboard_id}}" data-item="video">
             <span class="deletebtn" data-id="{{id}}"></span>
             <video width="400px" controls>
@@ -32,17 +34,19 @@
             </video>
         </div>
     {{/each}}
+    </div>
 </script>
-</div>
 
-<div class="images">
+
+
     <script type="text/template" id="image-template">
+    <div class="images">
     {{#each images}}
         <div class="drag-drop image" style="left:{{xPos}}px; top:{{yPos}}px;" data-id="{{id}}" data-set="{{whiteboard_id}}" data-item="image">
             <span class="deletebtn" data-id="{{id}}"></span>
             <img src="uploads/{{title}}" draggable="false" alt="whiteboardimg">
         </div>
+        </div>
     {{/each}}
 </script>
 </section>
-</div>
