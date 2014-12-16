@@ -11,6 +11,7 @@
     <div class="canvaszelf" id="cnvszelf">
 
 <script type="text/template" id="postit-template">
+    <div class="postits">
     {{#each notes}}
         <div class="drag-drop postit" style="left:{{xPos}}px; top:{{yPos}}px;" data-id="{{id}}" data-set="{{whiteboard_id}}" data-item="note">
             <span class="deletebtn" data-id="{{id}}"></span>
@@ -18,7 +19,10 @@
         </div>
     {{/each}}
 </script>
+</div>
 
+
+<div class="videos">
 <script type="text/template" id="video-template">
     {{#each videos}}
         <div class="drag-drop video" style="left:{{xpos}}px; top:{{ypos}}px;" data-id="{{id}}" data-set="{{whiteboard_id}}" data-item="video">
@@ -28,7 +32,10 @@
             </video>
         </div>
     {{/each}}
+</script>
+</div>
 
+<div class="images">
     <script type="text/template" id="image-template">
     {{#each images}}
         <div class="drag-drop image" style="left:{{xPos}}px; top:{{yPos}}px;" data-id="{{id}}" data-set="{{whiteboard_id}}" data-item="image">
@@ -38,3 +45,4 @@
     {{/each}}
 </script>
 </section>
+</div>

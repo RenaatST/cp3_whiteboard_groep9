@@ -64,7 +64,7 @@ module.exports = (function(){
 			xpos: 400,
 			ypos: 300,
 		})
-	  .done(this.getData());
+	  .done(setTimeout(this.getData(),2000));
 	};
 
 	WhiteboardApplication.prototype.updateVideo = function() {
@@ -89,7 +89,6 @@ module.exports = (function(){
 	        contentType: false,
 	        processData: false
 		})
-	  .done(this.getData());
 	};
 
 	WhiteboardApplication.prototype.addimage = function() {
@@ -100,11 +99,10 @@ module.exports = (function(){
 			url: 'index.php?page=canvas&boardid='+boardid+'&action=addimage',
 			type: "POST",
 			data: data,
-			cache: false,
+			cache: true,
 	        contentType: false,
 	        processData: false
-		})
-	  .done(this.getData());
+		}).complete(this.getData());
 	};
 
 	WhiteboardApplication.prototype.updateImage = function() {
@@ -119,8 +117,11 @@ module.exports = (function(){
 
 	WhiteboardApplication.prototype.getData = function() {
 		console.log("getdata");
+		$(".postits").empty();
+		$(".videos").empty();
+		$(".images").empty();
 		var boardid = GetURLParameter("boardid");
-		$.get("index.php?page=data",{"boardid":boardid})
+		setTimeout($.get("index.php?page=data",{"boardid":boardid})
   			.done(function(data) {
   				var postTemplateSrc = $('#postit-template').text();
 				var postTemplate = Handlebars.compile( postTemplateSrc );
@@ -143,8 +144,13 @@ module.exports = (function(){
 				$('.canvaszelf').append($(result));
 				new DragAndDropHandler();
 
-  			});
+  			}),2000);
+		
+	};
 
+
+	WhiteboardApplication.prototype.detleteitem = function(event) {
+		console.log(this,event.currentTarget);
 	};
 
 	return WhiteboardApplication;

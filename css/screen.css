@@ -212,12 +212,10 @@ nav {
     cursor: move;
 
 }
-
-
-
-
-
-
-
-
->>>>>>> 031b23a3085940b7300dc14d6e8a5a1e593f5780
+.deletebtn {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 0;
+    background-color: red;
+}
